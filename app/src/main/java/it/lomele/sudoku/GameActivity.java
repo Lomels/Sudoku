@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -25,11 +26,14 @@ public class GameActivity extends AppCompatActivity {
     private Holder holder;
     protected List<Cell> plainGrid;
     protected SudokuBoardAdapter mAdapter;
+    private Chronometer simpleChronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+        simpleChronometer = findViewById(R.id.simpleChronometer);
+        simpleChronometer.start();
 
         holder = new Holder();
 
@@ -49,8 +53,8 @@ public class GameActivity extends AppCompatActivity {
     public void setGrid(List<List<Integer>> grid){
         plainGrid = new ArrayList<Cell>();
         Cell cell;
-
-        /*int[] a = {2,4,1,7,9,8,5,3,6,6,9,3,1,2,5,4,7,8,5,8,7,6,4,3,1,2,9,8,1,2,5,3,9,7,6,4,7,6,9,2,1,4,8,5,3,3,5,4,8,6,7,2,9,1,4,7,6,9,5,1,3,8,2,1,2,5,3,8,6,9,4,7,9,3,8,4,7,2,6,1,5};
+/*
+        int[] a = {2,4,1,7,9,8,5,3,6,6,9,3,1,2,5,4,7,8,5,8,7,6,4,3,1,2,9,8,1,2,5,3,9,7,6,4,7,6,9,2,1,4,8,5,3,3,5,4,8,6,7,2,9,1,4,7,6,9,5,1,3,8,2,1,2,5,3,8,6,9,4,7,9,3,8,4,7,2,6,1,5};
         for(int i : a) {
             if(i == 0)
                 cell = new Cell(i, true);
@@ -58,6 +62,7 @@ public class GameActivity extends AppCompatActivity {
                 cell = new Cell(i, false);
             plainGrid.add(cell);
         }*/
+
         for(List<Integer> l : grid) {
             for (Integer i : l) {
                 if(i == 0)
@@ -69,7 +74,6 @@ public class GameActivity extends AppCompatActivity {
             }
             System.out.println(l);
         }
-
         GridView gridView = (GridView) findViewById(R.id.gvGrid);
 
         Log.d(TAG, ""+plainGrid.size());
@@ -165,10 +169,13 @@ public class GameActivity extends AppCompatActivity {
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btnSolve):
-                    if(GameController.check(plainGrid))
+                    if(GameController.check(plainGrid)) {
+                        simpleChronometer.stop();
                         Toast.makeText(GameActivity.this, "You won!", Toast.LENGTH_SHORT).show();
-                    else
+
+                    }else {
                         Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }

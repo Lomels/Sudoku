@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <Chronometer
+        android:id="@+id/simpleChronometer"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        />
+
     <GridView
         android:id="@+id/gvGrid"
         android:layout_width="match_parent"

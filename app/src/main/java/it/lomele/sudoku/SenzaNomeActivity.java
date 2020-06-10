@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class SenzaNomeActivity extends AppCompatActivity {
+
+
+
+
     //DEBUG
     private static final String TAG = "MainActivity";
 
@@ -22,6 +27,7 @@ public class SenzaNomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senzanome);
         holder = new Holder();
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -42,7 +48,9 @@ public class SenzaNomeActivity extends AppCompatActivity {
         private Button btnMedium;
         private Button btnHard;
 
+
         public Holder(){
+
             tvSudoku = findViewById(R.id.tvSudoku);
             btnEasy = findViewById(R.id.btnEasy);
             btnMedium = findViewById(R.id.btnMedium);
@@ -60,11 +68,15 @@ public class SenzaNomeActivity extends AppCompatActivity {
             switch (v.getId()){
                 case(R.id.btnEasy):
                     intent.putExtra("difficulty", Constant.DIFFICULTY_EASY);
+
+                    break;
                 case(R.id.btnMedium):
                     intent.putExtra("difficulty", Constant.DIFFICULTY_MEDIUM);
+
                     break;
                 case(R.id.btnHard):
                     intent.putExtra("difficulty", Constant.DIFFICULTY_HARD);
+
                     break;
             }
 
