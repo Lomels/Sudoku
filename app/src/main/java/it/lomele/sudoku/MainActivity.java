@@ -1,21 +1,15 @@
 package it.lomele.sudoku;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    //DEBUG
-    private static final String TAG = "MainActivity";
 
-    protected Holder holder;
+    private Holder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,64 +18,30 @@ public class MainActivity extends AppCompatActivity {
         holder = new Holder();
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Constant.REQUEST_CODE_MAIN){
-            if(resultCode == Constant.RESULT_SUDOKU_BOARD_SERVICE){
-                Bundle bundle = data.getBundleExtra("bundle");
-                List<List<Integer>> grid = (List<List<Integer>>) bundle.getSerializable("grid");
-                holder.next(grid);
-            }
+    class Holder implements View.OnClickListener {
+        private Button btn_start;
+
+
+        public Holder() {
+            btn_start = findViewById(R.id.btn_start);
+            btn_start.setOnClickListener(this);
         }
-    }
 
 
-    private class Holder implements View.OnClickListener{
-        private TextView tvSudoku;
-        private Button btnEasy;
-        private Button btnMedium;
-        private Button btnHard;
 
-        public Holder(){
-            tvSudoku = findViewById(R.id.tvSudoku);
-            btnEasy = findViewById(R.id.btnEasy);
-            btnMedium = findViewById(R.id.btnMedium);
-            btnHard = findViewById(R.id.btnHard);
-
-            btnEasy.setOnClickListener(this);
-            btnMedium.setOnClickListener(this);
-            btnHard.setOnClickListener(this);
-
-        }
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), SudokuBoardGenerator.class);
-            switch (v.getId()){
-                case(R.id.btnEasy):
-                    intent.putExtra("difficulty", Constant.DIFFICULTY_EASY);
-                case(R.id.btnMedium):
-                    intent.putExtra("difficulty", Constant.DIFFICULTY_MEDIUM);
-                    break;
-                case(R.id.btnHard):
-                    intent.putExtra("difficulty", Constant.DIFFICULTY_HARD);
-                    break;
+            if(v.getId() == btn_start.getId()){
+                // Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
+                Intent menu_intent = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(menu_intent);
             }
 
-            intent.putExtra("request", Constant.REQUEST_CODE_MAIN);
-            startActivityForResult(intent, Constant.REQUEST_CODE_MAIN);
-        }
 
-        public void next(List<List<Integer>> grid){
-            Intent i = new Intent(getApplicationContext(), GameActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("grid", (Serializable) grid);
-            i.putExtra("bundle", bundle);
-            startActivity(i);
-        }
-
-        public void setError(String e){
-            tvSudoku.setText(e);
         }
     }
+
+
+
 }

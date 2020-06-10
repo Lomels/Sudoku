@@ -7,4 +7,11 @@
     <string name="button_easy">Facile</string>
     <string name="button_medium">Medio</string>
     <string name="button_hard">Difficile</string>
+    <string name="button_start">Inizia ora!</string>
+    <string name="textView_createdBy">Creato da Marco Lo Mele e Giulia Desideri</string>
+    <string name="textView_rules">"L'obiettivo del sudoku è riempire ogni casella vuota della griglia 9x9 con dei numeri in modo tale che ciascuna colonna, ciascuna riga e ciascun quadrante(3x3) contengano tutti i numeri da 1 a 9.\\n I numeri preinseriti all'inizio non possono essere cambiati.\\n C'è una sola soluzione esatta per ciasciuno schema di sudoku. La soluzione può essere trovta con la logica. Non occorre tirare a indovinare. "</string>
+    <string name="button_help">Aiuto</string>
+    <string name="button_newGame">Nuova partita</string>
+    <string name="button_scores">Punteggi</string>
+    <string name="button_settings">Impostazioni</string>
 </resources>
