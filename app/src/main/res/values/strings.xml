@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Sudoku</string>
+    <string name="url_board_api" translatable="false">https://sugoku.herokuapp.com/board?difficulty=</string>
+    <string name="api_difficulty_easy" translatable="false">easy</string>
+    <string name="api_difficulty_medium" translatable="false">medium</string>
+    <string name="api_difficulty_hard" translatable="false">hard</string>
+    <string name="button_delete">Del</string>
+    <string name="button_check_solution">Check</string>
+    <string name="button_easy">Easy</string>
+    <string name="button_medium">Medium</string>
+    <string name="button_hard">Hard</string>
+    <string name="msg_cell_not_editable">You cannot edit this number!</string>
+</resources>

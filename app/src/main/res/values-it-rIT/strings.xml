@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sudoku</string>
+    <string name="button_delete">canc</string>
+    <string name="msg_cell_not_editable">Non puoi modificare questo numero!</string>
+    <string name="button_check_solution">controlla</string>
+    <string name="button_easy">Facile</string>
+    <string name="button_medium">Medio</string>
+    <string name="button_hard">Difficile</string>
+</resources>
