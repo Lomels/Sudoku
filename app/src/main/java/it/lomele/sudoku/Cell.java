@@ -1,12 +1,12 @@
 package it.lomele.sudoku;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Cell {
     private Integer value;
     private int position;
+    private int row;
+    private int col;
     private boolean editable;
+    private boolean highlight;
 
     public Cell(int value, boolean editable) {
         this.value = value;
@@ -29,11 +29,35 @@ public class Cell {
         this.position = position;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
     public boolean isEditable() {
         return editable;
     }
 
     public void setEditable(boolean editable) {
         this.editable = editable;
+    }
+
+    public boolean isHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(boolean highlight) {
+        this.highlight = highlight;
     }
 }

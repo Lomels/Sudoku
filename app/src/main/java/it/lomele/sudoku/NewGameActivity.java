@@ -1,19 +1,19 @@
 package it.lomele.sudoku;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class SenzaNomeActivity extends AppCompatActivity {
+public class NewGameActivity extends AppCompatActivity {
     //DEBUG
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "NewGameActivity";
 
     protected Holder holder;
 
