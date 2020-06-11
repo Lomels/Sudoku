@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -25,11 +26,14 @@ public class GameActivity extends AppCompatActivity {
     private Holder holder;
     protected List<Cell> plainGrid;
     protected SudokuBoardAdapter mAdapter;
+    private Chronometer simpleChronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+        simpleChronometer = findViewById(R.id.simpleChronometer);
+        simpleChronometer.start();
 
         holder = new Holder();
 
@@ -165,10 +169,12 @@ public class GameActivity extends AppCompatActivity {
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btnSolve):
-                    if(GameController.check(plainGrid))
+                    if(GameController.check(plainGrid)) {
+                        simpleChronometer.stop();
                         Toast.makeText(GameActivity.this, "You won!", Toast.LENGTH_SHORT).show();
-                    else
+                    }else {
                         Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }

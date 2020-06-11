@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
-public class SenzaNomeActivity extends AppCompatActivity {
+public class NewGameActivity extends AppCompatActivity {
     //DEBUG
     private static final String TAG = "MainActivity";
 
