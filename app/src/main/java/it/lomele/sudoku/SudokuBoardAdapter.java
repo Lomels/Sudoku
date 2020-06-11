@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
 public class SudokuBoardAdapter extends BaseAdapter {
@@ -47,19 +50,28 @@ public class SudokuBoardAdapter extends BaseAdapter {
 
         final TextView etValue = (TextView) convertView.findViewById(R.id.etValue);
 
-        if(mGrid.get(position).getValue() == 0){
+        // FULL THE GRID
+        if(mGrid.get(position).getValue() == 0)
             etValue.setText("");
-        }else{
+        else
             etValue.setText(val);
-        }
+
+
         if(!mGrid.get(position).isEditable())
             etValue.setTypeface(null, Typeface.BOLD);
         else
             etValue.setTextColor(Color.GREEN);
 
+        // HIGHLIGHT ROW, COLUMN AND CELLGROUP OF THE SELECTED CELL
+        if(mGrid.get(position).isHighlight())
+            etValue.setBackground(ContextCompat.getDrawable(mContext,R.drawable.grid_row_border_highlight));
 
 
         return convertView;
+    }
+
+    public void highlight(Cell cell){
+
     }
 
 }

@@ -36,7 +36,7 @@ public class MenuActivity extends Activity{
                 startActivity(help_intent);
             }
             if(v.getId() == btn_newGame.getId()){
-                Intent newGame_intent = new Intent(MenuActivity.this, SenzaNomeActivity.class);
+                Intent newGame_intent = new Intent(MenuActivity.this, NewGameActivity.class);
                 startActivity(newGame_intent);
             }
 

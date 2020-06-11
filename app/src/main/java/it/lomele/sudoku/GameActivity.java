@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private JSONObject jsonObject;
     private Holder holder;
     protected List<Cell> plainGrid;
+    protected List<List<Cell>> matrixGrid;
     protected SudokuBoardAdapter mAdapter;
 
     @Override
@@ -47,8 +47,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void setGrid(List<List<Integer>> grid){
-        plainGrid = new ArrayList<Cell>();
-        Cell cell;
+        plainGrid = GameController.fromIntMatrixToCellArray(grid);
+
+        GridView gridView = (GridView) findViewById(R.id.gvGrid);
+
+        Log.d(TAG, ""+plainGrid.size());
+        mAdapter = new SudokuBoardAdapter(getApplicationContext(), plainGrid);
+        gridView.setAdapter(mAdapter);
+        gridView.setOnItemClickListener(holder);
+
+        matrixGrid = GameController.fromIntMatrixToCellMatrix(grid);
+        GameController.fromCellArrayToCellMatrix(plainGrid);
 
         /*int[] a = {2,4,1,7,9,8,5,3,6,6,9,3,1,2,5,4,7,8,5,8,7,6,4,3,1,2,9,8,1,2,5,3,9,7,6,4,7,6,9,2,1,4,8,5,3,3,5,4,8,6,7,2,9,1,4,7,6,9,5,1,3,8,2,1,2,5,3,8,6,9,4,7,9,3,8,4,7,2,6,1,5};
         for(int i : a) {
@@ -58,26 +67,15 @@ public class GameActivity extends AppCompatActivity {
                 cell = new Cell(i, false);
             plainGrid.add(cell);
         }*/
-        for(List<Integer> l : grid) {
-            for (Integer i : l) {
-                if(i == 0)
-                    cell = new Cell(i, true);
-                else
-                    cell = new Cell(i, false);
 
-                plainGrid.add(cell);
-            }
-            System.out.println(l);
-        }
-
-        GridView gridView = (GridView) findViewById(R.id.gvGrid);
-
-        Log.d(TAG, ""+plainGrid.size());
-        mAdapter = new SudokuBoardAdapter(getApplicationContext(), plainGrid);
-        gridView.setAdapter(mAdapter);
-        gridView.setOnItemClickListener(holder);
     }
 
+    public void setHighlight(int position){
+
+        for(int i=position; i<position+9; i++){
+            plainGrid.get(i).setHighlight(true);
+        }
+    }
 
     private class Holder implements View.OnClickListener, AdapterView.OnItemClickListener{
         private Button btnSolve;
@@ -176,6 +174,8 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             this.currentCell = position;
+            setHighlight(position);
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
