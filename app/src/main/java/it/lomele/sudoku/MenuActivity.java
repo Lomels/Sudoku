@@ -21,12 +21,15 @@ public class MenuActivity extends Activity{
     class Holder implements View.OnClickListener {
         private Button btn_help;
         private Button btn_newGame;
+        private Button btn_scores;
 
         private Holder() {
             btn_help = findViewById(R.id.btn_help);
             btn_newGame = findViewById(R.id.btn_newGame);
+            btn_scores = findViewById(R.id.btn_scores);
             btn_help.setOnClickListener(this);
             btn_newGame.setOnClickListener(this);
+            btn_scores.setOnClickListener(this);
         }
 
         @Override
@@ -38,6 +41,10 @@ public class MenuActivity extends Activity{
             if(v.getId() == btn_newGame.getId()){
                 Intent newGame_intent = new Intent(MenuActivity.this, NewGameActivity.class);
                 startActivity(newGame_intent);
+            }
+            if(v.getId()== btn_scores.getId()){
+                Intent scores_intent = new Intent(MenuActivity.this, ScoresActivity.class);
+                startActivity(scores_intent);
             }
 
         }
