@@ -1,4 +1,4 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.utils;
 
 public class Constant {
     //DIFFICULTIES
@@ -11,4 +11,7 @@ public class Constant {
 
     //RESULT CODES
     public static final int RESULT_SUDOKU_BOARD_SERVICE = 1;
+
+    //INTENTSERVICES RESULT STRINGS
+    public static final String RESULT  = "it.lomele.sudoku.services.result";
 }

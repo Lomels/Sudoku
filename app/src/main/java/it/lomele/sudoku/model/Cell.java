@@ -1,10 +1,13 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.model;
 
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable {
     private Integer value;
     private int position;
     private int row;
     private int col;
+    private int block;
     private boolean editable;
     private boolean highlight;
 
@@ -44,6 +47,10 @@ public class Cell {
     public void setCol(int col) {
         this.col = col;
     }
+
+    public int getBlock(){ return block;}
+
+    public void setBlock(int block){ this.block = block;}
 
     public boolean isEditable() {
         return editable;

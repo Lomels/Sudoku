@@ -1,30 +1,59 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
+import org.parceler.ParcelClass;
+import org.parceler.Parcels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import de.sfuhrm.sudoku.Creator;
+import de.sfuhrm.sudoku.GameMatrix;
+import de.sfuhrm.sudoku.Riddle;
+import de.sfuhrm.sudoku.Solver;
+import it.lomele.sudoku.control.GameService;
+import it.lomele.sudoku.R;
+import it.lomele.sudoku.model.Cell;
+import it.lomele.sudoku.utils.Constant;
+import it.lomele.sudoku.utils.GridManager;
+import it.lomele.sudoku.utils.Serializer;
 
 public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "SudokuGridActivity";
-    private JSONObject jsonObject;
+    private int difficulty;
     private Holder holder;
     protected List<Cell> plainGrid;
+    protected List<Cell> solvedGrid;
+    protected List<List<Cell>> matrixGrid;
     protected SudokuBoardAdapter mAdapter;
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(Constant.RESULT)){
+                Bundle bundle = intent.getBundleExtra("bundle");
+                solvedGrid = (List<Cell>) bundle.getSerializable("solved");
+                for(Cell c : solvedGrid){
+                    System.out.println(c.getValue());
+                }
+                Log.d(TAG, "Solved");
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,48 +63,35 @@ public class GameActivity extends AppCompatActivity {
         holder = new Holder();
 
         Intent data = getIntent();
-        Bundle bundle = data.getBundleExtra("bundle");
-        List<List<Integer>> grid = (List<List<Integer>>) bundle.getSerializable("grid");
+        difficulty = data.getIntExtra("difficulty", 1);
 
-        setGrid(grid);
-
-        Map<String, List<List<Integer>>> map = new HashMap<>();
-        map.put("board", grid);
-        jsonObject = new JSONObject(map);
-
-
+        registerReceiver(receiver, new IntentFilter(Constant.RESULT));
+        setGrid();
     }
 
-    public void setGrid(List<List<Integer>> grid){
-        plainGrid = new ArrayList<Cell>();
-        Cell cell;
+    public void setGrid(){
+        GameMatrix gameMatrix = Creator.createFull();
+        Riddle riddle = Creator.createRiddle(gameMatrix);
+        plainGrid = GridManager.fromGameMatrixToCellArray(riddle);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });
+        thread.start();
 
         /*int[] a = {2,4,1,7,9,8,5,3,6,6,9,3,1,2,5,4,7,8,5,8,7,6,4,3,1,2,9,8,1,2,5,3,9,7,6,4,7,6,9,2,1,4,8,5,3,3,5,4,8,6,7,2,9,1,4,7,6,9,5,1,3,8,2,1,2,5,3,8,6,9,4,7,9,3,8,4,7,2,6,1,5};
-        for(int i : a) {
-            if(i == 0)
-                cell = new Cell(i, true);
-            else
-                cell = new Cell(i, false);
-            plainGrid.add(cell);
-        }*/
-        for(List<Integer> l : grid) {
-            for (Integer i : l) {
-                if(i == 0)
-                    cell = new Cell(i, true);
-                else
-                    cell = new Cell(i, false);
-
-                plainGrid.add(cell);
-            }
-            System.out.println(l);
-        }
+*/
 
         GridView gridView = (GridView) findViewById(R.id.gvGrid);
 
-        Log.d(TAG, ""+plainGrid.size());
+        Log.d(TAG, "Size "+plainGrid.size());
         mAdapter = new SudokuBoardAdapter(getApplicationContext(), plainGrid);
         gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(holder);
+
+        //matrixGrid = GridManager.fromCellArrayToCellMatrix(grid);
     }
 
 
@@ -165,7 +181,7 @@ public class GameActivity extends AppCompatActivity {
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btnSolve):
-                    if(GameController.check(plainGrid))
+                    if(GameService.check(plainGrid, solvedGrid))
                         Toast.makeText(GameActivity.this, "You won!", Toast.LENGTH_SHORT).show();
                     else
                         Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
@@ -176,6 +192,9 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             this.currentCell = position;
+            Cell cell = plainGrid.get(position);
+            plainGrid = GridManager.highlight(plainGrid, cell.getRow(), cell.getCol(), cell.getBlock());
+            mAdapter.notifyDataSetChanged();
         }
     }
 }

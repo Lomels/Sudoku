@@ -19,6 +19,8 @@ public class GridViewItem extends LinearLayout {
         super(context, attrs, defStyle);
     }
 
+
+    // IT MAKES SUDOKU CELLS SQUARED ON ALL DEVICES
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);

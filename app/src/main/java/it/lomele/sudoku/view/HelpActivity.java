@@ -1,7 +1,9 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import it.lomele.sudoku.R;
 
 public class HelpActivity extends Activity {
 
