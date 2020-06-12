@@ -1,4 +1,4 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import java.util.List;
+
+import it.lomele.sudoku.R;
+import it.lomele.sudoku.model.Cell;
 
 public class SudokuBoardAdapter extends BaseAdapter {
     private final Context mContext;
@@ -65,13 +68,12 @@ public class SudokuBoardAdapter extends BaseAdapter {
         // HIGHLIGHT ROW, COLUMN AND CELLGROUP OF THE SELECTED CELL
         if(mGrid.get(position).isHighlight())
             etValue.setBackground(ContextCompat.getDrawable(mContext,R.drawable.grid_row_border_highlight));
+        else
+            etValue.setBackground(ContextCompat.getDrawable(mContext,R.drawable.grid_row_border));
 
 
         return convertView;
     }
 
-    public void highlight(Cell cell){
-
-    }
 
 }

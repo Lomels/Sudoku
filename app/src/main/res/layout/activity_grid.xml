@@ -13,7 +13,7 @@
     <GridView
         android:id="@+id/gvGrid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="484dp"
         android:background="@drawable/grid_row_border"
         android:clickable="false"
         android:numColumns="9"
