@@ -1,35 +1,29 @@
 package it.lomele.sudoku.view;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.parceler.ParcelClass;
-import org.parceler.Parcels;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
 import de.sfuhrm.sudoku.Creator;
 import de.sfuhrm.sudoku.GameMatrix;
 import de.sfuhrm.sudoku.Riddle;
-import de.sfuhrm.sudoku.Solver;
-import it.lomele.sudoku.control.GameService;
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.control.GameService;
 import it.lomele.sudoku.model.Cell;
 import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
-import it.lomele.sudoku.utils.Serializer;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -40,17 +34,21 @@ public class GameActivity extends AppCompatActivity {
     protected List<Cell> solvedGrid;
     protected List<List<Cell>> matrixGrid;
     protected SudokuBoardAdapter mAdapter;
+    protected GameService mService;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+    private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
-        public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(Constant.RESULT)){
-                Bundle bundle = intent.getBundleExtra("bundle");
-                solvedGrid = (List<Cell>) bundle.getSerializable("solved");
-                for(Cell c : solvedGrid){
-                    System.out.println(c.getValue());
-                }
-                Log.d(TAG, "Solved");
+        public void handleMessage(Message inputMessage){
+            Bundle bundle = inputMessage.getData();
+            switch(inputMessage.what){
+                case(Constant.SOLUTION_MSG):
+                    solvedGrid = (List<Cell>) bundle.getSerializable("solved");
+                    break;
+                case(Constant.HINT_MSG):
+                    plainGrid = (List<Cell>) bundle.getSerializable("board");
+                    mAdapter.notifyDataSetChanged();
+                    break;
             }
         }
     };
@@ -61,29 +59,24 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid);
 
         holder = new Holder();
+        mService = new GameService(handler);
 
         Intent data = getIntent();
         difficulty = data.getIntExtra("difficulty", 1);
-
-        registerReceiver(receiver, new IntentFilter(Constant.RESULT));
         setGrid();
     }
 
+
     public void setGrid(){
+        // GENERATING GRID
         GameMatrix gameMatrix = Creator.createFull();
         Riddle riddle = Creator.createRiddle(gameMatrix);
         plainGrid = GridManager.fromGameMatrixToCellArray(riddle);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-        thread.start();
+        // GENERATING SOLUTION WITH A THREAD
+        mService.solve(riddle);
 
-        /*int[] a = {2,4,1,7,9,8,5,3,6,6,9,3,1,2,5,4,7,8,5,8,7,6,4,3,1,2,9,8,1,2,5,3,9,7,6,4,7,6,9,2,1,4,8,5,3,3,5,4,8,6,7,2,9,1,4,7,6,9,5,1,3,8,2,1,2,5,3,8,6,9,4,7,9,3,8,4,7,2,6,1,5};
-*/
-
+        // GENERATING GRIDVIEW
         GridView gridView = (GridView) findViewById(R.id.gvGrid);
 
         Log.d(TAG, "Size "+plainGrid.size());
@@ -97,6 +90,7 @@ public class GameActivity extends AppCompatActivity {
 
     private class Holder implements View.OnClickListener, AdapterView.OnItemClickListener{
         private Button btnSolve;
+        private Button btnHint;
         private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
         private Button btnDel;
         private int currentCell;
@@ -104,6 +98,7 @@ public class GameActivity extends AppCompatActivity {
         public Holder(){
             btnSolve = findViewById(R.id.btnSolve);
             btnDel = findViewById(R.id.btnDel);
+            btnHint = findViewById(R.id.btnHint);
             btn1 = findViewById(R.id.btn1);
             btn2 = findViewById(R.id.btn2);
             btn3 = findViewById(R.id.btn3);
@@ -116,6 +111,7 @@ public class GameActivity extends AppCompatActivity {
 
             btnSolve.setOnClickListener(this);
             btnDel.setOnClickListener(this);
+            btnHint.setOnClickListener(this);
             btn1.setOnClickListener(this);
             btn2.setOnClickListener(this);
             btn3.setOnClickListener(this);
@@ -180,7 +176,13 @@ public class GameActivity extends AppCompatActivity {
                     set(currentCell, 0);
                     mAdapter.notifyDataSetChanged();
                     break;
-                case(R.id.btnSolve):
+                case(R.id.btnHint):
+                    mService.hint(plainGrid);
+                    break;
+                case(R.id.btnSolve):/*
+                    plainGrid.clear();
+                    plainGrid.addAll(solvedGrid);
+                    mAdapter.notifyDataSetChanged();*/
                     if(GameService.check(plainGrid, solvedGrid))
                         Toast.makeText(GameActivity.this, "You won!", Toast.LENGTH_SHORT).show();
                     else

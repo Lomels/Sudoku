@@ -1,10 +1,14 @@
 package it.lomele.sudoku.control;
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import de.sfuhrm.sudoku.GameMatrix;
 import de.sfuhrm.sudoku.Riddle;
@@ -13,88 +17,112 @@ import it.lomele.sudoku.model.Cell;
 import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
 
-public class GameService implements Runnable {
+public class GameService{
     // DEBUG
     private static final String TAG = "GameService";
 
-
     private Riddle mRiddle;
+    private final Handler mHandler;
+    private HintThread hintThread = null;
+    private List<Cell> solution;
 
-    public GameService(Riddle riddle){
-        this.mRiddle = riddle;
+    public GameService(Handler handler){
+        this.mHandler = handler;
     }
 
+    public void solve(Riddle toSolve){
+        SolvingThread thread = new SolvingThread(toSolve);
+        thread.start();
+    }
+
+    public void hint(List<Cell> toSolve){
+        // If a thread is already looking for a hint, stop it and start a new one
+        /*if(hintThread != null)
+            hintThread.delete();
+*/        hintThread = new HintThread(toSolve);
+        hintThread.start();
+
+    }
+
+    // It checks if the solution provided by the user is correct
     public static boolean check(List<Cell> userSolution, List<Cell> correctSolution) {
-        /*List<Integer> values = new ArrayList<Integer>(9);
-
-        //Check rows
-        for(int i=0; i<list.size(); i+=9) {
-            System.out.println("row: ");
-            for(int j=i; j<i+9; j++) {
-
-                if(values.contains(list.get(j).getValue()))
-                    return false;
-                values.add(list.get(j).getValue());
-            }
-            System.out.println(values);
-            values.clear();
-        }
-
-        //Check columns
-        for(int i=0; i<9; i++) {
-            System.out.println("col: ");
-            for(int j=i; j<list.size() ; j += 9) {
-                if(values.contains(list.get(j).getValue()))
-                    return false;
-                values.add(list.get(j).getValue());
-            }
-            System.out.println(values);
-            values.clear();
-        }
-
-
-        //Check blocks
-        for(int i=0; i<list.size(); i += list.size()/3) {
-            for(int k=i; k<i+9; k +=3) {
-                System.out.println("Block: ");
-                for(int j=k; j<=k+18; j += 9) {
-                    for(int z=j; z<j+3; z++) {
-                        if(values.contains(list.get(z).getValue()))
-                            return false;
-                        values.add(list.get(z).getValue());
-                    }
-
-
-                }
-                System.out.println(values);
-                values.clear();
-            }
-        }*/
-
         for(int i=0; i<userSolution.size(); i++){
             if(!userSolution.get(i).getValue().equals(correctSolution.get(i).getValue()))
                 return false;
         }
-
         return true;
     }
 
-    @Override
-    public void run() {
-        Solver solver = new Solver(mRiddle);
-        List<GameMatrix> solutions = solver.solve();
+    private class HintThread extends  Thread{
+        private List<Cell> userAttempt;
+        private List<Cell> missingCells = new ArrayList<>();
 
-        List<Cell> mSolution = GridManager.fromGameMatrixToCellArray(solutions.get(0));
-        for(Cell c : mSolution){
-            System.out.println(c.isEditable());
+        public HintThread(List<Cell> array){
+            this.userAttempt = array;
         }
-        Intent i = new Intent(Constant.RESULT);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("solved", (Serializable) mSolution);
-        i.putExtra("bundle", bundle);
 
-        Log.d(TAG, "Thread: finish, sending broadcast");
-        sendBroadcast(i);
+        @Override
+        public void run(){
+            for(int i=0; i<userAttempt.size(); i++){
+                if(!userAttempt.get(i).getValue().equals(solution.get(i).getValue()))
+                    missingCells.add(i, solution.get(i));
+                else
+                    missingCells.add(i, new Cell(0, false));
+            }
+
+            Boolean hintFound = false;
+            Cell mHint = null;
+            Random random = new Random();
+            int hintIndex = 0;
+
+            while(!hintFound) {
+                hintIndex = random.nextInt(80);
+                if ((mHint = missingCells.get(hintIndex)).getValue() != 0)
+                    hintFound = true;
+            }
+
+            userAttempt.remove(hintIndex);
+            userAttempt.add(hintIndex, mHint);
+
+            Log.d(TAG, "HintThread prima del messaggio: "+ userAttempt.toString());
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("board",(Serializable) userAttempt);
+            Message msg = mHandler.obtainMessage(Constant.HINT_MSG);
+            msg.setData(bundle);
+            mHandler.sendMessage(msg);
+
+            Log.d(TAG, "HintThread: hint created");
+
+        }
+
+
     }
 
+    private class SolvingThread extends Thread {
+        private Riddle toSolve;
+
+        public SolvingThread(Riddle grid){
+            this.toSolve = grid;
+        }
+
+        @Override
+        public void run() {
+            Solver solver = new Solver(toSolve);
+            List<GameMatrix> solutions = solver.solve();
+
+            solution = GridManager.fromGameMatrixToCellArray(solutions.get(0));
+            for (Cell c : solution) {
+                System.out.println(c.isEditable());
+            }
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("solved", (Serializable) solution);
+            Message msg = mHandler.obtainMessage(Constant.SOLUTION_MSG);
+            msg.setData(bundle);
+            mHandler.sendMessage(msg);
+            Log.d(TAG, "SolvingThread: finish, sending broadcast");
+        }
+
+    }
 }
