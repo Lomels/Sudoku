@@ -22,14 +22,17 @@ public class MenuActivity extends Activity{
         private Button btn_help;
         private Button btn_newGame;
         private Button btn_scores;
+        private Button btn_settings;
 
         private Holder() {
             btn_help = findViewById(R.id.btn_help);
             btn_newGame = findViewById(R.id.btn_newGame);
             btn_scores = findViewById(R.id.btn_scores);
+            btn_settings = findViewById(R.id.btn_settings);
             btn_help.setOnClickListener(this);
             btn_newGame.setOnClickListener(this);
             btn_scores.setOnClickListener(this);
+            btn_settings.setOnClickListener(this);
         }
 
         @Override
@@ -46,8 +49,12 @@ public class MenuActivity extends Activity{
                 Intent scores_intent = new Intent(MenuActivity.this, ScoresActivity.class);
                 startActivity(scores_intent);
             }
+            if(v.getId() == btn_settings.getId()){
+                Intent setting_intent = new Intent(MenuActivity.this, ScoreboardActivity.class);
+                startActivity(setting_intent);
+            }
 
-        }
+        } //TODO SWITCH AND CHANGE LINK BETWEEN BTN_SETTINGS AND SCOREBOARDACTIVITY
     }
 }
 

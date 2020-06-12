@@ -11,13 +11,19 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import it.lomele.sudoku.DATABASE.Db;
+import it.lomele.sudoku.DATABASE.ScoreDAO;
+import it.lomele.sudoku.DATABASE.ScoreDbController;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -27,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     protected List<Cell> plainGrid;
     protected SudokuBoardAdapter mAdapter;
     private Chronometer simpleChronometer;
+    protected Db db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid);
         simpleChronometer = findViewById(R.id.simpleChronometer);
         simpleChronometer.start();
+        db = Room.databaseBuilder(getApplicationContext(), Db.class, "ScoreDatabase").build();
 
         holder = new Holder();
 
@@ -88,6 +96,7 @@ public class GameActivity extends AppCompatActivity {
         private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
         private Button btnDel;
         private int currentCell;
+        private ScoreDbController controller = new ScoreDbController(getApplicationContext());
 
         public Holder(){
             btnSolve = findViewById(R.id.btnSolve);
@@ -171,6 +180,13 @@ public class GameActivity extends AppCompatActivity {
                 case(R.id.btnSolve):
                     if(GameController.check(plainGrid)) {
                         simpleChronometer.stop();
+
+                        try {
+                            controller.insertNewScore(simpleChronometer.getFormat(), "easy");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         Toast.makeText(GameActivity.this, "You won!", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
