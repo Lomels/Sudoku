@@ -22,6 +22,8 @@
         <activity android:name=".view.NewGameActivity"></activity>
         <activity android:name=".view.HelpActivity"></activity>
         <activity android:name=".view.GameActivity"></activity>
+        <activity android:name=".ScoresActivity"></activity>
+        <activity android:name=".ScoreboardActivity"></activity>
         <service android:name=".control.GameService"></service>
     </application>
 

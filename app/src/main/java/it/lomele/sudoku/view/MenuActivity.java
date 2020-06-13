@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.ScoreboardActivity;
+import it.lomele.sudoku.ScoresActivity;
 
 public class MenuActivity extends Activity{
 

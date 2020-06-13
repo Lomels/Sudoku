@@ -18,8 +18,11 @@ public interface ScoreDAO {
     @Query("SELECT * FROM score WHERE level LIKE :level ")
     List<Score> getByLevel(String level);
 
-    @Query(("SELECT * FROM score WHERE time LIKE :time"))
-    List<Score> getByTime(Time time);
+    @Query("SELECT * FROM score WHERE time LIKE :time")
+    List<Score> getByTime(String time);
+
+    @Query("SELECT * FROM score WHERE id LIKE :id")
+    Score getById(int id);
 
 
     @Insert

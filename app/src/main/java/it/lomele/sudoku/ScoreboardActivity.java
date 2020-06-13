@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.lomele.sudoku.DATABASE.Score;
+import it.lomele.sudoku.DATABASE.ScoreDbController;
 
 public class ScoreboardActivity extends Activity {
 
@@ -30,7 +31,9 @@ public class ScoreboardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
-        List<String> list = new ArrayList<>();
+        ScoreDbController controller = new ScoreDbController(getApplicationContext());
+
+        List<Score> list = controller.getAll();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.rv_scoreboard);
@@ -42,9 +45,9 @@ public class ScoreboardActivity extends Activity {
 
 
     public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.Holder> {
-        List<String> mDataset;
+        List<Score> mDataset;
 
-        ScoreAdapter(List<String> myDataset) {
+        ScoreAdapter(List<Score> myDataset) {
             mDataset = myDataset;
         }
 
@@ -59,12 +62,16 @@ public class ScoreboardActivity extends Activity {
 
         @Override
         public void onBindViewHolder(@NonNull Holder holder, int position) {
-            holder.tvScore.setText(mDataset.get(position));
+            if(!mDataset.isEmpty())
+                holder.tvScore.setText(mDataset.get(position).toString());
+            holder.tvScore.setText("No scores available.");
         }
 
         @Override
         public int getItemCount() {
-            return mDataset.size();
+            if(!mDataset.isEmpty())
+                return mDataset.size();
+            return 0;
         }
 
 

@@ -1,24 +1,31 @@
 package it.lomele.sudoku.DATABASE;
-import androidx.core.content.PermissionChecker;
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.sql.Time;
 
 
 @Entity
 public class Score {
     @ColumnInfo(name = "time")
-    public Time time;
+    public String time;
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
+    @NonNull
     @ColumnInfo(name = "level")
     public String level;
 
 
-    public Score(Time time, String level) {
+    public Score(String time, String level) {
         this.time = time;
         this.level = level;
+    }
+
+    @Override
+    public String toString(){
+        String mString = "Level: "+level+", Time: "+time;
+        return mString;
     }
 }
