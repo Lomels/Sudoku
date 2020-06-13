@@ -193,7 +193,7 @@ public class GameActivity extends AppCompatActivity {
                     set(currentCell, 0);
                     mAdapter.notifyDataSetChanged();
                     break;
-		case(R.id.btnHint):
+		        case(R.id.btnHint):
                     mService.hint(plainGrid);
                     break;
                 
@@ -201,8 +201,8 @@ public class GameActivity extends AppCompatActivity {
                     plainGrid.clear();
                     plainGrid.addAll(solvedGrid);
                     mAdapter.notifyDataSetChanged();*/
-                    if(GameService.check(plainGrid, solvedGrid))
-			simpleChronometer.stop();
+                    if(GameService.check(plainGrid, solvedGrid)){
+			            simpleChronometer.stop();
                         try {
                             controller.insertNewScore(simpleChronometer.getFormat(), "easy");
                         } catch (ParseException e) {

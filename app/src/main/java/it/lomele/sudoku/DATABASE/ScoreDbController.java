@@ -32,7 +32,7 @@ public class ScoreDbController {
 
         Db score_database = Db.getInstance(context);
         Score score = new Score(convertStrToTime(string),"easy");  //TODO change easy
-        score_database.scoreDAO().insert(convertStrToTime(string), level);
+        score_database.scoreDAO().insert(score);
 
     }
 

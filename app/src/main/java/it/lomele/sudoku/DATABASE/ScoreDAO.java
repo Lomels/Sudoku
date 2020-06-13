@@ -23,8 +23,8 @@ public interface ScoreDAO {
 
 
     @Insert
-    public void insert(Time time, String level);
+    public void insert(Score score);
 
     @Delete
-    public void delete(Time time, String level);
+    public void delete(Score score);
 }

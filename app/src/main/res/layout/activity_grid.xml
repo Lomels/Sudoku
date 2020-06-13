@@ -102,9 +102,22 @@
             android:text="@string/button_delete" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSolve"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solve" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSolve"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:text="Solve" />
+
+        <Button
+            android:id="@+id/btnHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hint" />
+    </LinearLayout>
 </LinearLayout>
