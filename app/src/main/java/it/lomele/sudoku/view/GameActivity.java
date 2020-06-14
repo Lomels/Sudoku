@@ -16,25 +16,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import org.json.JSONObject;
-
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import de.sfuhrm.sudoku.Creator;
 import de.sfuhrm.sudoku.GameMatrix;
 import de.sfuhrm.sudoku.Riddle;
+import it.lomele.sudoku.DATABASE.Db;
+import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.control.GameService;
 import it.lomele.sudoku.model.Cell;
 import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
-
-import it.lomele.sudoku.DATABASE.Db;
-import it.lomele.sudoku.DATABASE.ScoreDAO;
-import it.lomele.sudoku.DATABASE.ScoreDbController;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -204,7 +198,7 @@ public class GameActivity extends AppCompatActivity {
                     if(GameService.check(plainGrid, solvedGrid)){
 			            simpleChronometer.stop();
                         try {
-                            controller.insertNewScore(simpleChronometer.getFormat(), "easy");
+                            controller.insertNewScore(simpleChronometer.getContentDescription().toString(), "easy");
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
