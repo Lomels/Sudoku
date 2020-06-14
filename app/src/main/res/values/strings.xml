@@ -4,6 +4,7 @@
     <string name="api_difficulty_easy" translatable="false">easy</string>
     <string name="api_difficulty_medium" translatable="false">medium</string>
     <string name="api_difficulty_hard" translatable="false">hard</string>
+
     <string name="button_delete">Del</string>
     <string name="button_check_solution">Check</string>
     <string name="button_easy">Easy</string>
@@ -11,9 +12,12 @@
     <string name="button_hard">Hard</string>
     <string name="button_start">Start Now</string>
     <string name="button_help">Help</string>
-    <string name="button_newGame">New Game</string>
+    <string name="button_new_game">New Game</string>
     <string name="button_scores">Scores</string>
     <string name="button_settings">Settings</string>
+    <string name="button_highscores">Highscores</string>
+    <string name="button_scores_list">All scores</string>
+
     <string name="textView_createdBy">Created by Marco Lo Mele and Giulia Desideri</string>
     <string name="textView_rules">The goal of Sudoku is to fill each empty box on the 9x9 grid with numbers so that each column, each row and each quadrant(3x3) contains all the numbers 1 through 9.\n The number pre-entered at the beginning cannot be changed. \n There is only one exact solution for each sudoku scheme. The solution can be found using logic so there is no need to guess!</string>
 

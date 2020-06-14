@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +45,8 @@ public class GameActivity extends AppCompatActivity {
     protected Db db;
     protected GameService mService;
 
+    private ProgressBar progBar;
+    private LinearLayout layout;
 
     private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
@@ -71,6 +75,12 @@ public class GameActivity extends AppCompatActivity {
         holder = new Holder();
         mService = new GameService(handler);
 
+        progBar = findViewById(R.id.indeterminateBar);
+        layout = findViewById(R.id.layout);
+
+        progBar.setVisibility(View.VISIBLE);
+        layout.setVisibility(View.GONE);
+
         Intent data = getIntent();
         difficulty = data.getIntExtra("difficulty", 1);
         setGrid();
@@ -95,6 +105,9 @@ public class GameActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(holder);
 
         //matrixGrid = GridManager.fromCellArrayToCellMatrix(grid);
+        progBar.setVisibility(View.GONE);
+        layout.setVisibility(View.VISIBLE);
+
     }
 
 
