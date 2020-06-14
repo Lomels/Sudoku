@@ -9,6 +9,7 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ScoreDbController {
@@ -54,6 +55,91 @@ public class ScoreDbController {
     }
 
     //TODO delete()
+
+
+    private int partition(List<Score> list, int low, int high) throws ParseException {
+
+        LocalTime pivot = LocalTime.parse(list.get(high).getTime());
+        int j;
+        int index = (low-1); // indice dell'elemento più piccolo. -1 all'inizio
+        for (j=low; j<high; j++){
+
+// se elemento corrente minore di pivot
+            LocalTime time = LocalTime.parse(list.get(j).getTime());
+            if (time.isBefore(pivot)){
+
+                index++;
+// scambia arr[index] and arr[j]
+                Score temp = list.get(index);
+                list.set(index, list.get(j));
+                list.set(j, temp);
+            }
+        }
+// scambia arr[index+1] e arr[high] (o pivot)
+        Score temp = list.get(index + 1);
+        list.set(index + 1, list.get(high));
+        list.set(high, temp);
+        return index+1;
+    }
+    /* La funzione principale che implementa QuickSort()
+    arr[] --> array da ordinare,
+    low --> indice iniziale,
+    high --> indice finale */
+    public void sort(List<Score> list, int low, int high) throws ParseException {
+        if (low < high)
+        {
+/* pi è l'indice di partizionamento, arr[pi] è ora al
+               posto giusto */
+            int pi = partition(list, low, high);
+// Ordina ricorsivamente gli elementi prima di
+// partition e dopo partition
+            sort(list, low, pi-1);
+            sort(list, pi+1, high);
+        }
+    }
+
+
+
+
+
+    public void stamp() throws ParseException {
+        List<Score> hardList= null;
+        List<Score> mediumList = null;
+        List<Score> easyList = null;
+        List<Score> allScore = getAll();
+        int i;
+        int j = 0;
+        int k = 0;
+        int z = 0;
+
+        for(i = 0; i < allScore.size(); i++) {
+
+            switch(allScore.get(i).getLevel()) {
+                case ("hard"):
+                    hardList.set(j, allScore.get(i));
+                    j++;
+                    break;
+                case ("medium"):
+                    mediumList.set(k, allScore.get(i));
+                    k++;
+                    break;
+                case ("easy"):
+                    easyList.set(z, allScore.get(i));
+                    z++;
+                    break;
+            }
+
+        }
+
+        sort(hardList, 0, hardList.size()-1);
+        sort(mediumList, 0, mediumList.size()-1);
+        sort(easyList, 0, easyList.size()-1);
+
+
+
+
+
+    }
 
 
 }

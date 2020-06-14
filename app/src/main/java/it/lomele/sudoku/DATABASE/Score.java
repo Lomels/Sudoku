@@ -28,4 +28,12 @@ public class Score {
         String mString = "Level: "+level+", Time: "+time;
         return mString;
     }
+
+    public String getLevel() {
+        return this.level;
+    }
+
+    public String getTime() {
+        return this.time;
+    }
 }
