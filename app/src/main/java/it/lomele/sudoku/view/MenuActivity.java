@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import it.lomele.sudoku.R;
-import it.lomele.sudoku.ScoreboardActivity;
-import it.lomele.sudoku.ScoresActivity;
 
 public class MenuActivity extends Activity{
 
@@ -50,7 +48,7 @@ public class MenuActivity extends Activity{
                 startActivity(newGame_intent);
             }
             if(v.getId()== btn_scores.getId()){
-                Intent scores_intent = new Intent(MenuActivity.this, ScoresActivity.class);
+                Intent scores_intent = new Intent(MenuActivity.this, ScoreActivity.class);
                 startActivity(scores_intent);
             }
             if(v.getId() == btn_settings.getId()){

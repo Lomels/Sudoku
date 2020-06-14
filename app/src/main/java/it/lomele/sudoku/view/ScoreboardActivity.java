@@ -1,6 +1,5 @@
-package it.lomele.sudoku;
+package it.lomele.sudoku.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,37 +8,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import it.lomele.sudoku.DATABASE.Score;
 import it.lomele.sudoku.DATABASE.ScoreDbController;
+import it.lomele.sudoku.R;
 
-public class ScoreboardActivity extends Activity {
+public class ScoreboardActivity extends Fragment {
 
     private RecyclerView recyclerView;
     private ScoreboardActivity.ScoreAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoreboard);
+        View rootView = layoutInflater.inflate(R.layout.activity_scoreboard, viewGroup, false);
 
-        ScoreDbController controller = new ScoreDbController(getApplicationContext());
-
+        ScoreDbController controller = new ScoreDbController(getContext());
         List<Score> list = controller.getAll();
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView recyclerView = findViewById(R.id.rv_scoreboard);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView recyclerView = rootView.findViewById(R.id.rv_scoreboard);
         RecyclerView.Adapter mAdapter = new ScoreAdapter(list);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
+
+        return rootView;
 
     }
 
@@ -64,7 +62,8 @@ public class ScoreboardActivity extends Activity {
         public void onBindViewHolder(@NonNull Holder holder, int position) {
             if(!mDataset.isEmpty())
                 holder.tvScore.setText(mDataset.get(position).toString());
-            holder.tvScore.setText("No scores available.");
+            else
+                holder.tvScore.setText("No scores available.");
         }
 
         @Override
@@ -83,7 +82,19 @@ public class ScoreboardActivity extends Activity {
                 tvScore = itemView.findViewById(R.id.tv_row);
             }
         }
-
-
     }
+
+    /*class Holder implements View.OnClickListener {
+            private Button btnHigh;
+
+            public Holder(){
+                btnHigh = findViewById(R.id.btnHigh2);
+                btnHigh.setOnClickListener(this);
+            }
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), HighscoresActivity.class);
+                startActivity(i);
+            }
+        }*/
 }
