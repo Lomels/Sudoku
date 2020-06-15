@@ -51,10 +51,12 @@ public class MenuActivity extends Activity{
                 Intent scores_intent = new Intent(MenuActivity.this, ScoreActivity.class);
                 startActivity(scores_intent);
             }
+
+            /*
             if(v.getId() == btn_settings.getId()){
                 Intent setting_intent = new Intent(MenuActivity.this, ScoreboardActivity.class);
                 startActivity(setting_intent);
-            }
+            }*/
 
         } //TODO SWITCH AND CHANGE LINK BETWEEN BTN_SETTINGS AND SCOREBOARDACTIVITY
     }

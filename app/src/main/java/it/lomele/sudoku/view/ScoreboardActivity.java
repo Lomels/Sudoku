@@ -26,7 +26,7 @@ public class ScoreboardActivity extends Fragment {
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = layoutInflater.inflate(R.layout.activity_scoreboard, viewGroup, false);
+        View rootView = layoutInflater.inflate(R.layout.fragment_scoreboard, viewGroup, false);
 
         ScoreDbController controller = new ScoreDbController(getContext());
         List<Score> list = controller.getAll();

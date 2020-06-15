@@ -10,11 +10,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreDbController {
     //DEBUG
     private static final String TAG = "ScoreDbController";
+
+    private List<Score> hardList;
+    private List<Score> mediumList;
+
+    private List<Score> easyList;
 
     Context context;
     private Db score_database;
@@ -44,6 +50,10 @@ public class ScoreDbController {
         }
     }
 
+    public void parseString(String string){
+
+    }
+
     public List<Score> getAll(){
         scores = score_database.scoreDAO().getAll();
         if(scores.equals(null)){
@@ -71,14 +81,14 @@ public class ScoreDbController {
                 index++;
 // scambia arr[index] and arr[j]
                 Score temp = list.get(index);
-                list.set(index, list.get(j));
-                list.set(j, temp);
+                list.add(index, list.get(j));
+                list.add(j, temp);
             }
         }
 // scambia arr[index+1] e arr[high] (o pivot)
         Score temp = list.get(index + 1);
-        list.set(index + 1, list.get(high));
-        list.set(high, temp);
+        list.add(index + 1, list.get(high));
+        list.add(high, temp);
         return index+1;
     }
     /* La funzione principale che implementa QuickSort()
@@ -102,11 +112,13 @@ public class ScoreDbController {
 
 
 
-    public void stamp() throws ParseException {
-        List<Score> hardList= null;
-        List<Score> mediumList = null;
-        List<Score> easyList = null;
+    public void createList() throws ParseException {
+
         List<Score> allScore = getAll();
+        hardList= new ArrayList<>();
+        mediumList = new ArrayList<>();
+        easyList = new ArrayList<>();
+
         int i;
         int j = 0;
         int k = 0;
@@ -116,15 +128,15 @@ public class ScoreDbController {
 
             switch(allScore.get(i).getLevel()) {
                 case ("hard"):
-                    hardList.set(j, allScore.get(i));
+                    hardList.add(j, allScore.get(i));
                     j++;
                     break;
                 case ("medium"):
-                    mediumList.set(k, allScore.get(i));
+                    mediumList.add(k, allScore.get(i));
                     k++;
                     break;
                 case ("easy"):
-                    easyList.set(z, allScore.get(i));
+                    easyList.add(z, allScore.get(i));
                     z++;
                     break;
             }
@@ -134,12 +146,17 @@ public class ScoreDbController {
         sort(hardList, 0, hardList.size()-1);
         sort(mediumList, 0, mediumList.size()-1);
         sort(easyList, 0, easyList.size()-1);
-
-
-
-
-
     }
 
+    public List<Score> getHardList() {
+        return hardList;
+    }
 
+    public List<Score> getMediumList() {
+        return mediumList;
+    }
+
+    public List<Score> getEasyList() {
+        return easyList;
+    }
 }
