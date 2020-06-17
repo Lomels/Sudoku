@@ -6,8 +6,12 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = {Score.class},version = 4, exportSchema = false)
+import it.lomele.sudoku.utils.Converters;
+
+@Database(entities = {Score.class}, version = 5, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class Db extends RoomDatabase {
 
     private static final String DB_NAME = "score_db";

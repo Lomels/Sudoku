@@ -26,4 +26,5 @@
     <string name="button_hint">Indizio</string>
     <string name="button_home">Esci</string>
     <string name="textView_time">"Tempo: "</string>
+    <string name="button_show">Mostra</string>
 </resources>

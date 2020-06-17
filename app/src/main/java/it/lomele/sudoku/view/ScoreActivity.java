@@ -51,6 +51,7 @@ public class ScoreActivity extends AppCompatActivity {
             btnList.setOnClickListener(this);
 
             btnHigh.setEnabled(false);
+            btnHigh.setBackgroundColor(getColor(R.color.colorButtonLightDisabled));
         }
 
         @Override

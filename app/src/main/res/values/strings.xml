@@ -19,6 +19,7 @@
     <string name="button_scores_list">All scores</string>
     <string name="button_hint">Hint</string>
     <string name="button_home">Quit</string>
+    <string name="button_show">Show</string>
 
     <string name="textView_Level">Level: </string>
     <string name="textView_createdBy">Created by Marco Lo Mele and Giulia Desideri</string>

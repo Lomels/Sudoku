@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:rotation="0">
 
     <TableLayout
@@ -14,10 +14,10 @@
         android:stretchColumns="0, 1, 2, 3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621">
+        app:layout_constraintVertical_bias="0.0">
 
         <TableRow
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text="EASY"
+                android:text="@string/button_easy"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text="MEDIUM"
+                android:text="@string/button_medium"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -75,7 +75,7 @@
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text="HARD"
+                android:text="@string/button_hard"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +20,17 @@ import java.util.List;
 import it.lomele.sudoku.DATABASE.Score;
 import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.model.Cell;
+import it.lomele.sudoku.utils.GridManager;
 
 public class ScoreboardFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ScoreboardFragment.ScoreAdapter mAdapter;
+    private ScoreboardFragment.ScoreAdapter recyclerAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private GridView gridView;
+
+    private SudokuBoardAdapter gridAdapter;
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,8 @@ public class ScoreboardFragment extends Fragment {
         RecyclerView.Adapter mAdapter = new ScoreAdapter(list);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
+
+        gridView = (GridView) rootView.findViewById(R.id.gvGrid);
 
         return rootView;
 
@@ -64,10 +73,12 @@ public class ScoreboardFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull Holder holder, int position) {
-            if (!mDataset.isEmpty())
-                holder.tvScore.setText(mDataset.get(position).toString());
-            else
-                holder.tvScore.setText("No scores available.");
+            if (!mDataset.isEmpty()) {
+                holder.tvLevel.setText(mDataset.get(position).getLevel());
+                holder.tvTime.setText(mDataset.get(position).getTime());
+                holder.setBoard(mDataset.get(position).getBoard());
+            }else
+                holder.tvLevel.setText("No scores available.");
         }
 
         @Override
@@ -78,12 +89,30 @@ public class ScoreboardFragment extends Fragment {
         }
 
 
-        private class Holder extends RecyclerView.ViewHolder {
-            private TextView tvScore;
+        public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
+            private TextView tvTime;
+            private TextView tvLevel;
+            private Button btnShow;
+
+            private List<Integer> mBoard;
 
             public Holder(@NonNull View itemView) {
                 super(itemView);
-                tvScore = itemView.findViewById(R.id.tv_row);
+                tvTime = itemView.findViewById(R.id.tvTime);
+                tvLevel = itemView.findViewById(R.id.tvLevel);
+                btnShow = itemView.findViewById(R.id.btnShow);
+
+                btnShow.setOnClickListener(this);
+            }
+
+            public void setBoard(List<Integer> board){ this.mBoard = board;}
+
+            @Override
+            public void onClick(View v) {
+                List<Cell> cellBoard = GridManager.fromIntArrayToCellArray(mBoard);
+                gridAdapter = new SudokuBoardAdapter(getContext(), cellBoard);
+                gridView.setAdapter(gridAdapter);
+
             }
         }
     }

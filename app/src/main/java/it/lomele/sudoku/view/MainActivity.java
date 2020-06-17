@@ -29,18 +29,12 @@ public class MainActivity extends AppCompatActivity {
             btn_start.setOnClickListener(this);
         }
 
-
-
-
         @Override
         public void onClick(View v) {
             if(v.getId() == btn_start.getId()){
-                // Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
                 Intent menu_intent = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(menu_intent);
             }
-
-
         }
     }
 

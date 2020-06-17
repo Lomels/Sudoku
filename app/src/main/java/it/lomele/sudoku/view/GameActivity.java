@@ -247,7 +247,7 @@ public class GameActivity extends AppCompatActivity {
             bundle.putString("hints", tvHints.getText().toString());
 
             if (result == true) {
-                controller.insertNewScore(time, level);
+                controller.insertNewScore(time, level, plainGrid);
                 Log.d(TAG, "New score inserted: " + time);
                 Toast.makeText(GameActivity.this, getString(R.string.toast_win), Toast.LENGTH_SHORT).show();
                 fragment = new EndGameFragment(1, bundle);
