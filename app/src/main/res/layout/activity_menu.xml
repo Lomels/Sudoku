@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btn_newGame"
+        android:id="@+id/btnNewGame"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginTop="220dp"
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_settings"
+        android:id="@+id/btnSettings"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginTop="64dp"
@@ -29,11 +30,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_scores"
+        app:layout_constraintTop_toBottomOf="@+id/btnScores"
         app:layout_constraintVertical_bias="0" />
 
     <Button
-        android:id="@+id/btn_scores"
+        android:id="@+id/btnScores"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginTop="64dp"
@@ -43,19 +44,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_newGame" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNewGame" />
 
     <Button
-        android:id="@+id/btn_help"
+        android:id="@+id/btnHelp"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginStart="288dp"
+        android:layout_marginStart="304dp"
         android:background="@color/colorButtonDark"
         android:text="@string/button_help"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_settings"
-        app:layout_constraintVertical_bias="0.848" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+        app:layout_constraintVertical_bias="0.867" />
+
+    <Button
+        android:id="@+id/btnIt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="it"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+        app:layout_constraintVertical_bias="0.864" />
+
+    <Button
+        android:id="@+id/btnEn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="en"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnHelp"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toEndOf="@+id/btnIt"
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings"
+        app:layout_constraintVertical_bias="0.864" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
