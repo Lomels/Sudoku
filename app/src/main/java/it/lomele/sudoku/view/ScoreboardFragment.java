@@ -19,10 +19,10 @@ import it.lomele.sudoku.DATABASE.Score;
 import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
 
-public class ScoreboardActivity extends Fragment {
+public class ScoreboardFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ScoreboardActivity.ScoreAdapter mAdapter;
+    private ScoreboardFragment.ScoreAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ScoreboardActivity extends Fragment {
         List<Score> mDataset;
 
         ScoreAdapter(List<Score> myDataset) {
-            if(myDataset != null)
+            if (myDataset != null)
                 mDataset = myDataset;
             else
                 mDataset = new ArrayList<>();
@@ -64,7 +64,7 @@ public class ScoreboardActivity extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull Holder holder, int position) {
-            if(!mDataset.isEmpty())
+            if (!mDataset.isEmpty())
                 holder.tvScore.setText(mDataset.get(position).toString());
             else
                 holder.tvScore.setText("No scores available.");
@@ -72,7 +72,7 @@ public class ScoreboardActivity extends Fragment {
 
         @Override
         public int getItemCount() {
-            if(!mDataset.isEmpty())
+            if (!mDataset.isEmpty())
                 return mDataset.size();
             return 0;
         }
@@ -87,18 +87,4 @@ public class ScoreboardActivity extends Fragment {
             }
         }
     }
-
-    /*class Holder implements View.OnClickListener {
-            private Button btnHigh;
-
-            public Holder(){
-                btnHigh = findViewById(R.id.btnHigh2);
-                btnHigh.setOnClickListener(this);
-            }
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), HighscoresActivity.class);
-                startActivity(i);
-            }
-        }*/
 }

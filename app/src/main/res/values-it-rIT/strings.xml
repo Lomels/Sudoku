@@ -16,12 +16,14 @@
     <string name="button_settings">Impostazioni</string>
     <string name="button_highscores">Record</string>
     <string name="button_scores_list">Tutti</string>
-    <string name="textView_Level">Difficoltà</string>
-    <string name="textView_hints">Indizi:</string>
-    <string name="textView_attempts">Tentativi:</string>
+    <string name="textView_Level">"Difficoltà: "</string>
+    <string name="textView_hints">"Indizi: "</string>
+    <string name="textView_attempts">"Tentativi: "</string>
     <string name="toast_last_attempt">Il tuo ultimo tentativo!</string>
     <string name="toast_no_hints">Nessun indizio rimasto!</string>
     <string name="toast_win">Hai vinto!</string>
     <string name="toast_lose">Hai perso!</string>
     <string name="button_hint">Indizio</string>
+    <string name="button_home">Esci</string>
+    <string name="textView_time">"Tempo: "</string>
 </resources>

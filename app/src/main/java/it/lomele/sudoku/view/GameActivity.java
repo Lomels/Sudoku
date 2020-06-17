@@ -1,25 +1,23 @@
 package it.lomele.sudoku.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.room.Room;
 import java.util.List;
 import de.sfuhrm.sudoku.Creator;
@@ -76,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid);
+        setContentView(R.layout.activity_game);
 
         simpleChronometer = findViewById(R.id.simpleChronometer);
         startChronometer();
@@ -87,9 +85,10 @@ public class GameActivity extends AppCompatActivity {
 
         Intent data = getIntent();
         setLevel(data.getIntExtra("difficulty", 1));
+        holder = new Holder();
 
         setGrid();
-        holder = new Holder();
+
 
     }
 
@@ -101,12 +100,12 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case(Constant.DIFFICULTY_MEDIUM):
                 this.level = getString(R.string.button_medium);
-                maxHints = 6;
+                maxHints = 9;
                 maxAttempts = 3;
                 break;
             case(Constant.DIFFICULTY_HARD):
                 this.level = getString(R.string.button_hard);
-                maxHints = 9;
+                maxHints = 6;
                 maxAttempts = 1;
                 break;
         }
@@ -200,10 +199,14 @@ public class GameActivity extends AppCompatActivity {
         }
 
         public boolean checkForAvailableHints(){
+            if(level.equals("Easy"))
+                return true;
             if(usedHints<maxHints){
                 usedHints++;
-                if(usedHints == maxHints)
+                if(usedHints == maxHints) {
                     btnHint.setEnabled(false);
+                    btnHint.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.colorButtonDarkDisabled)));
+                }
                 return true;
             }
             return false;
@@ -221,18 +224,46 @@ public class GameActivity extends AppCompatActivity {
         }
 
         public void setHints(){
-            tvHints.setText(usedHints+"/"+maxHints);
+            if(level.equals("Easy"))
+                tvHints.setText(" ∞");
+            else
+                tvHints.setText(usedHints+"/"+maxHints);
         }
 
         public void setAttempts(){
             tvAttempts.setText(usedAttempts+"/"+maxAttempts);
         }
 
-        public void endGame(){
+        public void endGame(boolean result) {
+            EndGameFragment fragment;
+            LinearLayout layout = findViewById(R.id.layout);
 
-            btnSolve.setEnabled(false);
-            DialogFragment dialog = new Dialog();
-            dialog.show(getSupportFragmentManager(), "missiles");
+            String time = ScoreDbController.convertLongToParsedString(stopChronometer());
+
+            Bundle bundle = new Bundle();
+            bundle.putString("level", level);
+            bundle.putString("time", time);
+            bundle.putString("attempts", tvAttempts.getText().toString());
+            bundle.putString("hints", tvHints.getText().toString());
+
+            if (result == true) {
+                controller.insertNewScore(time, level);
+                Log.d(TAG, "New score inserted: " + time);
+                Toast.makeText(GameActivity.this, getString(R.string.toast_win), Toast.LENGTH_SHORT).show();
+                fragment = new EndGameFragment(1, bundle);
+            } else {
+                btnSolve.setEnabled(false);
+                btnSolve.setActivated(false);
+                Toast.makeText(GameActivity.this, getString(R.string.toast_lose), Toast.LENGTH_SHORT).show();
+                fragment = new EndGameFragment(0, bundle);
+            }
+
+            layout.setVisibility(View.GONE);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.frameLayout, fragment)
+                    .commit();
+
         }
 
         @Override
@@ -282,7 +313,6 @@ public class GameActivity extends AppCompatActivity {
 		        case(R.id.btnHint):
 		            if(checkForAvailableHints()) {
                         mService.hint(plainGrid);
-                        usedHints++;
                         setHints();
                     }else{
                         Toast.makeText(GameActivity.this, getString(R.string.toast_no_hints), Toast.LENGTH_SHORT).show();
@@ -291,16 +321,13 @@ public class GameActivity extends AppCompatActivity {
                 
                 case(R.id.btnSolve):
                     if(GameService.check(plainGrid, solvedGrid)){
-                        controller.insertNewScore(ScoreDbController.convertLongToParsedString(stopChronometer()), level);
-                        Log.d(TAG, "New score inserted: "+ScoreDbController.convertLongToParsedString(stopChronometer()));
-                        Toast.makeText(GameActivity.this, getString(R.string.toast_win), Toast.LENGTH_SHORT).show();
+                        endGame(true);
                     }else {
                         if(checkForAvailableAttempts()) {
                             Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
                             setAttempts();
                         }else {
-                            Toast.makeText(GameActivity.this, getString(R.string.toast_lose), Toast.LENGTH_SHORT).show();
-                            endGame();
+                            endGame(false);
                         }
                     }
                     break;
@@ -316,33 +343,4 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public static class Dialog extends DialogFragment{
-        @Override
-        public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = requireActivity().getLayoutInflater();
-
-            AlertDialog alert = builder.create();
-            TextView tvResult = alert.findViewById(R.id.tvResult);
-            tvResult.setText(getString(R.string.toast_win));
-
-            builder.setView(inflater.inflate(R.layout.dialog_signin, null))
-                    .setPositiveButton("signin", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            // sign in the user ...
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Dialog.this.getDialog().cancel();
-                        }
-                    });
-
-
-            return builder.create();
-        }
-
-
-    }
 }

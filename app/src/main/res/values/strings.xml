@@ -18,12 +18,14 @@
     <string name="button_highscores">Highscores</string>
     <string name="button_scores_list">All scores</string>
     <string name="button_hint">Hint</string>
+    <string name="button_home">Quit</string>
 
-    <string name="textView_Level">Level</string>
+    <string name="textView_Level">Level: </string>
     <string name="textView_createdBy">Created by Marco Lo Mele and Giulia Desideri</string>
     <string name="textView_rules">The goal of Sudoku is to fill each empty box on the 9x9 grid with numbers so that each column, each row and each quadrant(3x3) contains all the numbers 1 through 9.\n The number pre-entered at the beginning cannot be changed. \n There is only one exact solution for each sudoku scheme. The solution can be found using logic so there is no need to guess!</string>
-    <string name="textView_hints">Hints:</string>
-    <string name="textView_attempts">Attempts:</string>
+    <string name="textView_hints">Hints: </string>
+    <string name="textView_attempts">Attempts: </string>
+    <string name="textView_time">Time: </string>
 
     <string name="toast_no_hints">No hints left!</string>
     <string name="toast_last_attempt">Your last attempt!</string>

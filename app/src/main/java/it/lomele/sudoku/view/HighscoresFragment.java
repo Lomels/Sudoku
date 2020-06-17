@@ -16,7 +16,7 @@ import it.lomele.sudoku.DATABASE.Score;
 import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
 
-public class HighscoresActivity extends Fragment {
+public class HighscoresFragment extends Fragment {
     ScoreDbController controller;
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
