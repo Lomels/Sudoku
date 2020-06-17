@@ -67,15 +67,10 @@ public class MenuActivity extends Activity{
 
             if(v.getId() == btnEn.getId()){
                 setAppLocale("en");
-                Intent menu_intent = new Intent(MenuActivity.this, MenuActivity.class);
-                startActivity(menu_intent);
             }
 
             if(v.getId() == btnIt.getId()){
                 setAppLocale("it");
-                Intent menu_intent = new Intent(MenuActivity.this, MenuActivity.class);
-                startActivity(menu_intent);
-
             }
 
 
@@ -94,6 +89,10 @@ public class MenuActivity extends Activity{
                 conf.locale = new Locale(localeCode.toLowerCase());
             }
             res.updateConfiguration(conf, dm);
+
+            Intent menu_intent = new Intent(MenuActivity.this, MenuActivity.class);
+            menu_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(menu_intent);
         }
     }
 }

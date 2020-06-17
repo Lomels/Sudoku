@@ -50,7 +50,7 @@
         android:id="@+id/btnHelp"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginStart="304dp"
+        android:layout_marginStart="288dp"
         android:background="@color/colorButtonDark"
         android:text="@string/button_help"
         android:textColor="#FFFFFF"

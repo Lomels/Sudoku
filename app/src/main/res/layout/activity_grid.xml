@@ -181,8 +181,8 @@
                 android:layout_width="209dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorButtonDark"
-                android:text="Solve"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/button_check_solution"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/btnHint"
@@ -190,8 +190,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorButtonDark"
-                android:textColor="#FFFFFF"
-                android:text="Hint" />
+                android:text="@string/button_hint"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

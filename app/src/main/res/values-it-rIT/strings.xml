@@ -23,4 +23,5 @@
     <string name="toast_no_hints">Nessun indizio rimasto!</string>
     <string name="toast_win">Hai vinto!</string>
     <string name="toast_lose">Hai perso!</string>
+    <string name="button_hint">Indizio</string>
 </resources>
