@@ -7,7 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Score.class},version = 2, exportSchema = false)
+@Database(entities = {Score.class},version = 4, exportSchema = false)
 public abstract class Db extends RoomDatabase {
 
     private static final String DB_NAME = "score_db";

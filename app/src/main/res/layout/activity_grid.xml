@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ProgressBar
-        android:id="@+id/indeterminateBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -20,16 +13,52 @@
         android:orientation="vertical">
 
 
-        <Chronometer
-            android:id="@+id/simpleChronometer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:gravity="center" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Chronometer
+                android:id="@+id/simpleChronometer"
+                android:layout_width="77dp"
+                android:layout_height="52dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textView_attempts"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/tvAttempts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/textView_hints"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/tvHints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
 
         <GridView
             android:id="@+id/gvGrid"
             android:layout_width="match_parent"
-            android:layout_height="484dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/grid_row_border"
             android:clickable="false"
             android:numColumns="9"
@@ -48,35 +77,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1" />
+                android:backgroundTint="@color/colorButtonLight"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                />
 
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="2" />
+                android:backgroundTint="@color/colorButtonLight"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                />
 
             <Button
                 android:id="@+id/btn3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3" />
+                android:backgroundTint="@color/colorButtonLight"
+                android:text="3"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="4" />
+                android:backgroundTint="@color/colorButtonLight"
+                android:text="4"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:backgroundTint="@color/colorButtonLight"
+                android:text="5"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
@@ -89,35 +130,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6" />
+                android:backgroundTint="@color/colorButtonMid"
+                android:text="6"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="7" />
+                android:backgroundTint="@color/colorButtonMid"
+                android:text="7"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8" />
+                android:backgroundTint="@color/colorButtonMid"
+                android:text="8"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btn9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="9" />
+                android:backgroundTint="@color/colorButtonMid"
+                android:text="9"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btnDel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/button_delete" />
+                android:backgroundTint="@color/colorButtonMid"
+                android:text="@string/button_delete"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,13 +180,17 @@
                 android:id="@+id/btnSolve"
                 android:layout_width="209dp"
                 android:layout_height="wrap_content"
-                android:text="Solve" />
+                android:backgroundTint="@color/colorButtonDark"
+                android:text="Solve"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/btnHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorButtonDark"
+                android:textColor="#FFFFFF"
                 android:text="Hint" />
         </LinearLayout>
     </LinearLayout>

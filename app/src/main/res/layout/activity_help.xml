@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/tv_rules"
-        android:layout_width="274dp"
-        android:layout_height="602dp"
+        android:layout_width="287dp"
+        android:layout_height="317dp"
         android:text="@string/textView_rules"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

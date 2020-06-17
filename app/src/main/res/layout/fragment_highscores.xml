@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:rotation="0">
 
     <TableLayout
         android:id="@+id/tb_scores"
-        android:layout_width="316dp"
-        android:layout_height="518dp"
+        android:layout_width="0dp"
+        android:layout_height="364dp"
         android:gravity="center"
         android:stretchColumns="0, 1, 2, 3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,8 +20,8 @@
         app:layout_constraintVertical_bias="0.621">
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="128dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
@@ -28,9 +29,10 @@
             >
 
             <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_column="0"
+                android:layout_gravity="bottom"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
@@ -40,8 +42,9 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_gravity="bottom"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
@@ -52,8 +55,9 @@
 
             <TextView
                 android:layout_width="52dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:layout_gravity="bottom"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
@@ -65,8 +69,9 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_column="3"
+                android:layout_gravity="bottom"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
@@ -83,45 +88,44 @@
             android:layout_weight="1"
             android:background="#FFFFFF">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="0"
-                android:layout_margin="1dp"
-                android:background="#FFFFFF"
-                android:gravity="center"
-                android:text=" 1'"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="1dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/medal" />
 
             <TextView
                 android:id="@+id/tvEasy1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvMedium1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvHard1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="3"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>
@@ -134,15 +138,12 @@
             android:layout_weight="1"
             android:background="#FFFFFF">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="0"
-                android:layout_margin="1dp"
-                android:background="#FFFFFF"
-                android:gravity="center"
-                android:text="2'"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="1dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                app:srcCompat="@drawable/medal_1" />
 
             <TextView
                 android:id="@+id/tvEasy2"
@@ -152,27 +153,29 @@
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/tvMedium2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/tvHard2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="3"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>
@@ -184,15 +187,12 @@
             android:layout_weight="1"
             android:background="#FFFFFF">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="0"
-                android:layout_margin="1dp"
-                android:background="#FFFFFF"
-                android:gravity="center"
-                android:text=" 3'"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="1dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/medal_2" />
 
             <TextView
                 android:id="@+id/tvEasy3"
@@ -202,27 +202,29 @@
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/tvMedium3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/tvHard3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="3"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" Text"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </TableRow>

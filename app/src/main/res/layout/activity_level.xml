@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".view.NewGameActivity">
 
     <Button
-        android:id="@+id/btn_newGame"
+        android:id="@+id/btnEasy"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginTop="220dp"
         android:background="@color/colorButtonLight"
-        android:text="@string/button_new_game"
+        android:gravity="center"
+        android:text="@string/button_easy"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -18,44 +21,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_settings"
-        android:layout_width="200dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="64dp"
-        android:background="@color/colorButtonDark"
-        android:text="@string/button_settings"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_scores"
-        app:layout_constraintVertical_bias="0" />
-
-    <Button
-        android:id="@+id/btn_scores"
+        android:id="@+id/btnMedium"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:layout_marginTop="64dp"
         android:background="@color/colorButtonMid"
-        android:text="@string/button_scores"
+        android:text="@string/button_medium"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_newGame" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEasy" />
 
     <Button
-        android:id="@+id/btn_help"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnHard"
+        android:layout_width="200dp"
         android:layout_height="43dp"
-        android:layout_marginStart="288dp"
+        android:layout_marginTop="64dp"
         android:background="@color/colorButtonDark"
-        android:text="@string/button_help"
+        android:text="@string/button_hard"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_settings"
-        app:layout_constraintVertical_bias="0.848" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMedium"
+        app:layout_constraintVertical_bias="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

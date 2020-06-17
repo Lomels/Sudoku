@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.utils.Constant;
-import java.io.Serializable;
-import java.util.List;
 
 public class NewGameActivity extends AppCompatActivity {
     //DEBUG
@@ -20,7 +18,7 @@ public class NewGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_senzanome);
+        setContentView(R.layout.activity_level);
         holder = new Holder();
     }
 
@@ -32,7 +30,6 @@ public class NewGameActivity extends AppCompatActivity {
         private Button btnHard;
 
         public Holder(){
-            tvSudoku = findViewById(R.id.tvSudoku);
             btnEasy = findViewById(R.id.btnEasy);
             btnMedium = findViewById(R.id.btnMedium);
             btnHard = findViewById(R.id.btnHard);

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.lomele.sudoku.DATABASE.Score;
@@ -46,7 +47,10 @@ public class ScoreboardActivity extends Fragment {
         List<Score> mDataset;
 
         ScoreAdapter(List<Score> myDataset) {
-            mDataset = myDataset;
+            if(myDataset != null)
+                mDataset = myDataset;
+            else
+                mDataset = new ArrayList<>();
         }
 
         @NonNull

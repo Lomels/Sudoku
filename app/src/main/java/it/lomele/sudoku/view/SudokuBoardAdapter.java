@@ -59,11 +59,9 @@ public class SudokuBoardAdapter extends BaseAdapter {
         else
             etValue.setText(val);
 
-
-        if(!mGrid.get(position).isEditable())
-            etValue.setTypeface(null, Typeface.BOLD);
-        else
-            etValue.setTextColor(Color.GREEN);
+        etValue.setTypeface(null, Typeface.BOLD);
+        if(mGrid.get(position).isEditable())
+            etValue.setTextColor(ContextCompat.getColor(mContext, R.color.colorButtonDark));
 
         // HIGHLIGHT ROW, COLUMN AND CELLGROUP OF THE SELECTED CELL
         if(mGrid.get(position).isHighlight())
