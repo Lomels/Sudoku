@@ -7,5 +7,7 @@
     <color name="colorButtonLight">#ee5e7a</color>
     <color name="colorButtonMid">#d15286</color>
     <color name="colorButtonDark">#b64790</color>
+    <color name="colorButtonLightDisabled">#74ee5e7a</color>
     <color name="colorButtonDarkDisabled">#74b64790</color>
+    <color name="colorButtonMidDisabled">#74b64790</color>
 </resources>

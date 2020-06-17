@@ -1,7 +1,6 @@
 package it.lomele.sudoku.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ public class SudokuBoardAdapter extends BaseAdapter {
         this.mGrid = grid;
         this.mContext = context;
     }
+
 
     @Override
     public int getCount() {

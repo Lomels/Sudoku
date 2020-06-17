@@ -12,22 +12,26 @@
 
         <Button
             android:id="@+id/btnList"
-            android:layout_width="wrap_content"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="92dp"
+            android:layout_marginEnd="76dp"
+            android:background="@color/colorButtonLight"
             android:text="@string/button_scores_list"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnHigh"
-            android:layout_width="wrap_content"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:background="@color/colorButtonLight"
             android:text="@string/button_highscores"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toStartOf="@+id/btnList"
-            app:layout_constraintHorizontal_bias="0.755"
+            app:layout_constraintHorizontal_bias="0.824"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

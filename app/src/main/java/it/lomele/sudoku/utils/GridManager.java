@@ -10,80 +10,27 @@ import it.lomele.sudoku.model.Cell;
 
 public class GridManager {
 
-    public static List<List<Cell>> fromIntMatrixToCellMatrix(List<List<Integer>> list){
+    public static List<Integer> fromCellArrayToIntArray(List<Cell> board){
+        List<Integer> newBoard = new ArrayList<>();
+
+        for(Cell c : board){
+            newBoard.add(c.getValue());
+        }
+
+        return newBoard;
+    }
+
+    public static List<Cell> fromIntArrayToCellArray(List<Integer> board){
+        List<Cell> newList = new ArrayList<>();
         Cell cell;
-        List<List<Cell>> matrix = new ArrayList<>();
-        for(int i=0; i<list.size(); i++){
-            List<Cell> temp = new ArrayList<>();
-            for(int j=0; j<list.get(i).size(); j++){
-                if(list.get(i).get(j) != 0)
-                    cell = new Cell(list.get(i).get(j), false);
-                else
-                    cell = new Cell(list.get(i).get(j), true);
 
-                cell.setRow(i);
-                cell.setCol(j);
-                temp.add(cell);
-            }
-            matrix.add(temp);
+        for(Integer i : board){
+            cell = new Cell(i, true);
+            newList.add(cell);
         }
 
-        return matrix;
-    }
+        return newList;
 
-    public static List<Cell> fromCellMatrixToCellArray(List<List<Cell>> matrix){
-        List<Cell> arrayList = new ArrayList<>();
-        for(List<Cell> l : matrix){
-            arrayList.addAll(l);
-        }
-
-        return arrayList;
-    }
-
-    public static List<List<Cell>> fromCellArrayToCellMatrix(List<Cell> array){
-        ArrayList<List<Cell>> matrix = new ArrayList<List<Cell>>(9);
-
-        for(int i=0; i<9; i++){
-            List<Cell> temp = new ArrayList<>();
-            int count = 0;
-            for(Cell c : array) {
-                if(count<9) {
-                    temp.add(c);
-                    count++;
-                }else{
-                    break;
-                }
-            }
-            matrix.add(i,temp);
-        }
-
-        for(List<Cell> l : matrix){
-            for(Cell c : l){
-                System.out.println(c.getValue());
-            }
-        }
-
-        return matrix;
-    }
-
-    public static List<Cell> fromIntMatrixToCellArray(List<List<Integer>> matrix) {
-        Cell cell;
-        List<Cell> arrayList = new ArrayList<>();
-        for (int i = 0; i < matrix.size(); i++) {
-            for (int j = 0; j < matrix.get(i).size(); j++) {
-                if (matrix.get(i).get(j) == 0)
-                    cell = new Cell(matrix.get(i).get(j), true);
-                else
-                    cell = new Cell(matrix.get(i).get(j), false);
-
-                cell.setBlock(checkBlock(i,j));
-                cell.setRow(i);
-                cell.setCol(j);
-                arrayList.add(cell);
-            }
-        }
-
-        return arrayList;
     }
 
     public static int checkBlock(int row, int col){

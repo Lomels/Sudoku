@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.model.Cell;
+import it.lomele.sudoku.utils.GridManager;
 
 public class ScoreDbController {
     //DEBUG
@@ -54,8 +56,9 @@ public class ScoreDbController {
         return null;
     }
 
-    public void insertNewScore(String time, String level){
-        Score score = new Score(time, level);
+    public void insertNewScore(String time, String level, List<Cell> board){
+        List<Integer> mBoard = GridManager.fromCellArrayToIntArray(board);
+        Score score = new Score(time, level, mBoard);
         score_database.scoreDAO().insert(score);
         Log.d(TAG, "Inserted new score: "+score.toString()+"with time: "+time);
     }

@@ -1,5 +1,6 @@
 package it.lomele.sudoku.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +13,8 @@ import it.lomele.sudoku.R;
 
 public class ScoreActivity extends AppCompatActivity {
 
-    HighscoresActivity highscoresFragment;
-    ScoreboardActivity scoreboardFragment;
+    HighscoresFragment highscoresFragment;
+    ScoreboardFragment scoreboardFragment;
     int showingFragment = 0;
 
     @Override
@@ -25,8 +26,8 @@ public class ScoreActivity extends AppCompatActivity {
     }
 
     public void createFragment(){
-        highscoresFragment = new HighscoresActivity();
-        scoreboardFragment = new ScoreboardActivity();
+        highscoresFragment = new HighscoresFragment();
+        scoreboardFragment = new ScoreboardFragment();
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -50,6 +51,7 @@ public class ScoreActivity extends AppCompatActivity {
             btnList.setOnClickListener(this);
 
             btnHigh.setEnabled(false);
+            btnHigh.setBackgroundColor(getColor(R.color.colorButtonLightDisabled));
         }
 
         @Override
@@ -57,11 +59,15 @@ public class ScoreActivity extends AppCompatActivity {
             switch(v.getId()){
                 case(R.id.btnHigh):
                     btnHigh.setEnabled(false);
+                    btnHigh.setBackgroundColor(getColor(R.color.colorButtonLightDisabled));
                     btnList.setEnabled(true);
+                    btnList.setBackgroundColor(getColor(R.color.colorButtonLight));
                     break;
                 case(R.id.btnList):
                     btnHigh.setEnabled(true);
+                    btnHigh.setBackgroundColor(getColor(R.color.colorButtonLight));
                     btnList.setEnabled(false);
+                    btnList.setBackgroundColor(getColor(R.color.colorButtonLightDisabled));
                     break;
             }
             switchFragment();

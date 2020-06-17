@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 
 @Entity
 public class Score {
@@ -17,10 +19,14 @@ public class Score {
     @ColumnInfo(name = "level")
     public String level;
 
+    @ColumnInfo(name = "board")
+    public List<Integer> board;
 
-    public Score(String time, String level) {
+
+    public Score(String time, String level, List<Integer> board) {
         this.time = time;
         this.level = level;
+        this.board = board;
     }
 
     @Override
@@ -36,4 +42,6 @@ public class Score {
     public String getTime() {
         return this.time;
     }
+
+    public List<Integer> getBoard(){ return this.board;}
 }
