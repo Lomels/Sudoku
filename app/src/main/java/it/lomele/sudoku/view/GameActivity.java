@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
 import java.util.List;
+
 import de.sfuhrm.sudoku.Creator;
 import de.sfuhrm.sudoku.GameMatrix;
 import de.sfuhrm.sudoku.Riddle;
@@ -37,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
     private List<Cell> plainGrid;
     private List<Cell> solvedGrid;
-    private String level;
+    private int level;
 
     private SudokuBoardAdapter mAdapter;
     private Holder holder;
@@ -51,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
     private int usedHints = 0;
     private int maxHints;
-    private int usedAttempts = 0;
+    private int usedAttempts = 1;
     private int maxAttempts;
 
 
@@ -92,19 +94,19 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void setLevel(int level){
-        switch(level){
+    public void setLevel(int difficulty){
+        switch(difficulty){
             case(Constant.DIFFICULTY_EASY):
-                this.level = getString(R.string.button_easy);
+                this.level = difficulty;
                 maxAttempts = 5;
                 break;
             case(Constant.DIFFICULTY_MEDIUM):
-                this.level = getString(R.string.button_medium);
+                this.level = difficulty;
                 maxHints = 9;
                 maxAttempts = 3;
                 break;
             case(Constant.DIFFICULTY_HARD):
-                this.level = getString(R.string.button_hard);
+                this.level = difficulty;
                 maxHints = 6;
                 maxAttempts = 1;
                 break;
@@ -199,7 +201,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         public boolean checkForAvailableHints(){
-            if(level.equals("Easy"))
+            if(level == Constant.DIFFICULTY_EASY)
                 return true;
             if(usedHints<maxHints){
                 usedHints++;
@@ -224,8 +226,8 @@ public class GameActivity extends AppCompatActivity {
         }
 
         public void setHints(){
-            if(level.equals("Easy"))
-                tvHints.setText(" ∞");
+            if(level == Constant.DIFFICULTY_EASY)
+                tvHints.setText("∞");
             else
                 tvHints.setText(usedHints+"/"+maxHints);
         }
@@ -241,7 +243,7 @@ public class GameActivity extends AppCompatActivity {
             String time = ScoreDbController.convertLongToParsedString(stopChronometer());
 
             Bundle bundle = new Bundle();
-            bundle.putString("level", level);
+            bundle.putInt("level", level);
             bundle.putString("time", time);
             bundle.putString("attempts", tvAttempts.getText().toString());
             bundle.putString("hints", tvHints.getText().toString());

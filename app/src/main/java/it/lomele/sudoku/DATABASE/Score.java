@@ -17,13 +17,13 @@ public class Score {
 
     @NonNull
     @ColumnInfo(name = "level")
-    public String level;
+    public int level;
 
     @ColumnInfo(name = "board")
     public List<Integer> board;
 
 
-    public Score(String time, String level, List<Integer> board) {
+    public Score(String time, int level, List<Integer> board) {
         this.time = time;
         this.level = level;
         this.board = board;
@@ -35,7 +35,7 @@ public class Score {
         return mString;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return this.level;
     }
 

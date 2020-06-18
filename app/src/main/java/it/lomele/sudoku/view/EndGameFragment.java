@@ -10,20 +10,20 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.utils.Constant;
 
 public class EndGameFragment extends Fragment {
     private int mResult;
     private String mAttempts;
     private String mHints;
     private String mTime;
-    private String mLevel;
+    private int mLevel;
 
     public EndGameFragment(int result, Bundle bundle){
         this.mResult = result;
         this.mAttempts = bundle.getString("attempts");
-        this.mLevel = bundle.getString("level");
+        this.mLevel = bundle.getInt("level");
         this.mHints = bundle.getString("hints");
         this.mTime = bundle.getString("time");
     }
@@ -57,7 +57,16 @@ public class EndGameFragment extends Fragment {
 
         tvAttempts.setText(mAttempts);
         tvHints.setText(mHints);
-        tvLevel.setText(mLevel);
+        switch(mLevel){
+            case(Constant.DIFFICULTY_EASY):
+                tvLevel.setText(getString(R.string.button_easy));
+                break;
+            case(Constant.DIFFICULTY_MEDIUM):
+                tvLevel.setText(getString(R.string.button_medium));
+                break;
+            case(Constant.DIFFICULTY_HARD):
+                tvLevel.setText(getString(R.string.button_hard));
+        }
         tvTime.setText(mTime);
     }
 

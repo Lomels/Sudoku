@@ -10,7 +10,7 @@ import androidx.room.TypeConverters;
 
 import it.lomele.sudoku.utils.Converters;
 
-@Database(entities = {Score.class}, version = 5, exportSchema = false)
+@Database(entities = {Score.class}, version = 6, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class Db extends RoomDatabase {
 

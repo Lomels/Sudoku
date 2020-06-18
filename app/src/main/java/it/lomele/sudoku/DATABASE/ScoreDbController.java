@@ -2,20 +2,14 @@ package it.lomele.sudoku.DATABASE;
 
 
 import android.content.Context;
-import android.database.SQLException;
 import android.util.Log;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.lomele.sudoku.R;
 import it.lomele.sudoku.model.Cell;
+import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
 
 public class ScoreDbController {
@@ -56,7 +50,7 @@ public class ScoreDbController {
         return null;
     }
 
-    public void insertNewScore(String time, String level, List<Cell> board){
+    public void insertNewScore(String time, int level, List<Cell> board){
         List<Integer> mBoard = GridManager.fromCellArrayToIntArray(board);
         Score score = new Score(time, level, mBoard);
         score_database.scoreDAO().insert(score);
@@ -87,18 +81,18 @@ public class ScoreDbController {
         int k = 0;
         int z = 0;
 
-        for(i = 0; i < allScore.size(); i++) {
-            switch(allScore.get(i).getLevel()) {
-                case ("Hard"):
-                    hardList.add(j, allScore.get(i).getTime());
+        for (Score s : allScore){
+            switch(s.getLevel()) {
+                case (Constant.DIFFICULTY_HARD):
+                    hardList.add(j, s.getTime());
                     j++;
                     break;
-                case ("Medium"):
-                    mediumList.add(k, allScore.get(i).getTime());
+                case (Constant.DIFFICULTY_MEDIUM):
+                    mediumList.add(k, s.getTime());
                     k++;
                     break;
-                case ("Easy"):
-                    easyList.add(z, allScore.get(i).getTime());
+                case (Constant.DIFFICULTY_EASY):
+                    easyList.add(z, s.getTime());
                     z++;
                     break;
             }
@@ -106,6 +100,7 @@ public class ScoreDbController {
 
         Collections.sort(easyList);
         Collections.sort(mediumList);
+        Collections.sort(hardList);
     }
 
     public List<String> getHardList() {

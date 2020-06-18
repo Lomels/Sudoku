@@ -1,11 +1,13 @@
 package it.lomele.sudoku.view;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.utils.Constant;
 
@@ -49,7 +51,6 @@ public class NewGameActivity extends AppCompatActivity {
                     break;
                 case(R.id.btnMedium):
                     difficulty = Constant.DIFFICULTY_MEDIUM;
-                    //TODO IMPLEMENTARE DIFFICOLTA
                     break;
                 case(R.id.btnHard):
                     difficulty = Constant.DIFFICULTY_HARD;

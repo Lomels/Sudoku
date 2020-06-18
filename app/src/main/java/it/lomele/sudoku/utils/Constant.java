@@ -9,7 +9,4 @@ public class Constant {
     //REQUEST CODES
     public static final int HINT_MSG = 1;
     public static final int SOLUTION_MSG = 2;
-
-    //INTENTSERVICES RESULT STRINGS
-    public static final String RESULT  = "it.lomele.sudoku.services.result";
 }

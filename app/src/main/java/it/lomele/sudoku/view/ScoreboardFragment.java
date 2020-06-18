@@ -21,6 +21,7 @@ import it.lomele.sudoku.DATABASE.Score;
 import it.lomele.sudoku.DATABASE.ScoreDbController;
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.model.Cell;
+import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
 
 public class ScoreboardFragment extends Fragment {
@@ -74,7 +75,7 @@ public class ScoreboardFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull Holder holder, int position) {
             if (!mDataset.isEmpty()) {
-                holder.tvLevel.setText(mDataset.get(position).getLevel());
+                holder.setLevel(mDataset.get(position).getLevel());
                 holder.tvTime.setText(mDataset.get(position).getTime());
                 holder.setBoard(mDataset.get(position).getBoard());
             }else
@@ -103,6 +104,19 @@ public class ScoreboardFragment extends Fragment {
                 btnShow = itemView.findViewById(R.id.btnShow);
 
                 btnShow.setOnClickListener(this);
+            }
+
+            public void setLevel(int level){
+                switch(level){
+                    case(Constant.DIFFICULTY_EASY):
+                        tvLevel.setText(getString(R.string.button_easy));
+                        break;
+                    case(Constant.DIFFICULTY_MEDIUM):
+                        tvLevel.setText(getString(R.string.button_medium));
+                        break;
+                    case(Constant.DIFFICULTY_HARD):
+                        tvLevel.setText(getString(R.string.button_hard));
+                }
             }
 
             public void setBoard(List<Integer> board){ this.mBoard = board;}
