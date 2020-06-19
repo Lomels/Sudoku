@@ -21,7 +21,6 @@ public class GameService{
     // DEBUG
     private static final String TAG = "GameService";
 
-    private Riddle mRiddle;
     private final Handler mHandler;
     private HintThread hintThread = null;
     private List<Cell> solution;
@@ -51,24 +50,6 @@ public class GameService{
                 return false;
         }
         return true;
-    }
-
-    private class GenerateThread extends Thread{
-        private Riddle mRiddle;
-        private List<Cell> mBoard;
-        private List<Cell> mSolution;
-
-        public GenerateThread(Riddle riddle){
-            this.mRiddle = riddle;
-        }
-
-        public void run(){
-            Solver solve = new Solver(mRiddle);
-            List<GameMatrix> solutionArray = solve.solve();
-            mSolution = GridManager.fromGameMatrixToCellArray(solutionArray.get(0));
-
-            mBoard = GridManager.fromGameMatrixToCellArray(mRiddle);
-        }
     }
 
     private class HintThread extends  Thread{

@@ -25,13 +25,15 @@ import java.util.List;
 import de.sfuhrm.sudoku.Creator;
 import de.sfuhrm.sudoku.GameMatrix;
 import de.sfuhrm.sudoku.Riddle;
-import it.lomele.sudoku.DATABASE.Db;
-import it.lomele.sudoku.DATABASE.ScoreDbController;
+
+import it.lomele.sudoku.database.ScoreDatabase;
+import it.lomele.sudoku.database.ScoreDbController;
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.control.GameService;
 import it.lomele.sudoku.model.Cell;
 import it.lomele.sudoku.utils.Constant;
 import it.lomele.sudoku.utils.GridManager;
+import it.lomele.sudoku.view.fragments.EndGameFragment;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -47,7 +49,7 @@ public class GameActivity extends AppCompatActivity {
     private Chronometer simpleChronometer;
     private long elapsedTime;
 
-    private Db db;
+    private ScoreDatabase db;
 
     private GameService mService;
 
@@ -57,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
     private int maxAttempts;
 
 
+    // Handler for handling messages sent by SolveThread and HintThread
     private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message inputMessage){
@@ -81,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
         simpleChronometer = findViewById(R.id.simpleChronometer);
         startChronometer();
 
-        db = Room.databaseBuilder(getApplicationContext(), Db.class, "ScoreDatabase").build();
+        db = Room.databaseBuilder(getApplicationContext(), ScoreDatabase.class, "ScoreDatabase").build();
 
         mService = new GameService(handler);
 
@@ -94,6 +97,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /*
+    Set level of difficulty and correct amount of maxAttempts and maxHints
+     */
     public void setLevel(int difficulty){
         switch(difficulty){
             case(Constant.DIFFICULTY_EASY):
@@ -113,18 +119,26 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    Starts the chronometer
+     */
     public void startChronometer(){
         simpleChronometer.setBase(SystemClock.elapsedRealtime());
         simpleChronometer.start();
     }
 
+    /*
+    Stops the chronometer and returnss its value
+     */
     public long stopChronometer(){
         simpleChronometer.stop();
         elapsedTime = SystemClock.elapsedRealtime() - simpleChronometer.getBase();
         return elapsedTime;
     }
 
-
+    /*
+    Generates the grid and its solution and draws the grid
+     */
     public void setGrid(){
         // GENERATING GRID
         GameMatrix gameMatrix = Creator.createFull();
@@ -134,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
         // GENERATING SOLUTION WITH A THREAD
         mService.solve(riddle);
 
-        // GENERATING GRIDVIEW
+        // GENERATING AND SETTING GRIDVIEW
         GridView gridView = (GridView) findViewById(R.id.gvGrid);
 
         Log.d(TAG, "Size "+plainGrid.size());
@@ -190,41 +204,52 @@ public class GameActivity extends AppCompatActivity {
             setAttempts();
         }
 
-        public void set(int position, int newVal){
+        /*
+        Set a new Value in selected cell
+         */
+        public void setVal(int position, int newVal){
             Cell cell = plainGrid.get(position);
             if(cell.isEditable()){
                 cell.setValue(newVal);
-                return;
-            }else{
-                Toast.makeText(GameActivity.this, getResources().getString(R.string.msg_cell_not_editable), Toast.LENGTH_SHORT).show();
+            }else{  // Warn the user that selected cell is not editable
+                Toast.makeText(GameActivity.this, getResources().getString(R.string.toast_cell_not_editable), Toast.LENGTH_SHORT).show();
             }
         }
 
+
+        /*
+        It checks if there are any available hints
+         */
         public boolean checkForAvailableHints(){
-            if(level == Constant.DIFFICULTY_EASY)
+            if(level == Constant.DIFFICULTY_EASY)   // Infinite hints in Easy mode
                 return true;
             if(usedHints<maxHints){
                 usedHints++;
-                if(usedHints == maxHints) {
+                if(usedHints == maxHints) {     // Disable the hint button because this was the last hint
                     btnHint.setEnabled(false);
-                    btnHint.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.colorButtonDarkDisabled)));
+                    btnHint.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.button_disabled_dark)));
                 }
                 return true;
             }
             return false;
         }
 
+        /*
+        It checks if there are any available attempts
+         */
         public boolean checkForAvailableAttempts(){
             if(usedAttempts<maxAttempts) {
                 usedAttempts++;
-                if (usedAttempts == maxAttempts)
+                if (usedAttempts == maxAttempts)    // Warn the user that this is his last attempt
                     Toast.makeText(GameActivity.this, getString(R.string.toast_last_attempt), Toast.LENGTH_SHORT).show();
                 return true;
             }
-
             return false;
         }
 
+        /*
+        Set the TextView with the number of used hints
+         */
         public void setHints(){
             if(level == Constant.DIFFICULTY_EASY)
                 tvHints.setText("∞");
@@ -232,34 +257,43 @@ public class GameActivity extends AppCompatActivity {
                 tvHints.setText(usedHints+"/"+maxHints);
         }
 
+        /*
+        Set the TextView with the number of used attempts
+         */
         public void setAttempts(){
             tvAttempts.setText(usedAttempts+"/"+maxAttempts);
         }
 
+        /*
+        Prepares the end game fragment and stores the game result in the DB
+         */
         public void endGame(boolean result) {
             EndGameFragment fragment;
             LinearLayout layout = findViewById(R.id.layout);
 
             String time = ScoreDbController.convertLongToParsedString(stopChronometer());
 
+            // Put game details in a bundle
             Bundle bundle = new Bundle();
             bundle.putInt("level", level);
             bundle.putString("time", time);
             bundle.putString("attempts", tvAttempts.getText().toString());
             bundle.putString("hints", tvHints.getText().toString());
 
-            if (result == true) {
-                controller.insertNewScore(time, level, plainGrid);
-                Log.d(TAG, "New score inserted: " + time);
+            // Insert a new score in DB and prepare de fragment
+            if (result) {
+                controller.insertNewScore(time, level, plainGrid, 1);
                 Toast.makeText(GameActivity.this, getString(R.string.toast_win), Toast.LENGTH_SHORT).show();
                 fragment = new EndGameFragment(1, bundle);
             } else {
+                controller.insertNewScore(time, level, plainGrid, 0);
                 btnSolve.setEnabled(false);
                 btnSolve.setActivated(false);
                 Toast.makeText(GameActivity.this, getString(R.string.toast_lose), Toast.LENGTH_SHORT).show();
                 fragment = new EndGameFragment(0, bundle);
             }
 
+            // Show the end game fragment
             layout.setVisibility(View.GONE);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -272,43 +306,43 @@ public class GameActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case(R.id.btn1):
-                    set(currentCell, 1);
+                    setVal(currentCell, 1);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn2):
-                    set(currentCell, 2);
+                    setVal(currentCell, 2);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn3):
-                    set(currentCell, 3);
+                    setVal(currentCell, 3);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn4):
-                    set(currentCell, 4);
+                    setVal(currentCell, 4);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn5):
-                    set(currentCell, 5);
+                    setVal(currentCell, 5);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn6):
-                    set(currentCell, 6);
+                    setVal(currentCell, 6);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn7):
-                    set(currentCell, 7);
+                    setVal(currentCell, 7);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn8):
-                    set(currentCell, 8);
+                    setVal(currentCell, 8);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btn9):
-                    set(currentCell, 9);
+                    setVal(currentCell, 9);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case(R.id.btnDel):
-                    set(currentCell, 0);
+                    setVal(currentCell, 0);
                     mAdapter.notifyDataSetChanged();
                     break;
 
@@ -336,6 +370,10 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        /*
+        Set the position of the selected cell
+        and notify the Adapter that it has to highlight the cell and its row, col and block
+         */
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             this.currentCell = position;

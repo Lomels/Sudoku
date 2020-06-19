@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import java.util.Locale;
 
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.view.fragments.AboutUsFragment;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -68,16 +69,16 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(v.getId() == btnHelp.getId() ) {
-                Intent help_intent = new Intent(MenuActivity.this, HelpActivity.class);
-                startActivity(help_intent);
+                Intent helpIntent = new Intent(MenuActivity.this, HelpActivity.class);
+                startActivity(helpIntent);
             }
             if(v.getId() == btnNewGame.getId()){
-                Intent newGame_intent = new Intent(MenuActivity.this, NewGameActivity.class);
-                startActivity(newGame_intent);
+                Intent newGameIntent = new Intent(MenuActivity.this, NewGameActivity.class);
+                startActivity(newGameIntent);
             }
             if(v.getId()== btnScores.getId()){
-                Intent scores_intent = new Intent(MenuActivity.this, ScoreActivity.class);
-                startActivity(scores_intent);
+                Intent scoresIntent = new Intent(MenuActivity.this, ScoreActivity.class);
+                startActivity(scoresIntent);
             }
 
             if(v.getId() == btnInfo.getId()){
@@ -122,9 +123,9 @@ public class MenuActivity extends AppCompatActivity {
             }
             res.updateConfiguration(conf, dm);
 
-            Intent menu_intent = new Intent(MenuActivity.this, MenuActivity.class);
-            menu_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(menu_intent);
+            Intent menuIntent = new Intent(MenuActivity.this, MenuActivity.class);
+            menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(menuIntent);
         }
     }
 }

@@ -1,4 +1,4 @@
-package it.lomele.sudoku.view;
+package it.lomele.sudoku.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import it.lomele.sudoku.R;
 import it.lomele.sudoku.utils.Constant;
+import it.lomele.sudoku.view.MenuActivity;
+import it.lomele.sudoku.view.NewGameActivity;
+import it.lomele.sudoku.view.ScoreActivity;
 
 public class EndGameFragment extends Fragment {
     private int mResult;
@@ -44,19 +47,16 @@ public class EndGameFragment extends Fragment {
         TextView tvLevel = v.findViewById(R.id.tvLevel);
         TextView tvTime = v.findViewById(R.id.tvTime);
 
-
-
         if(mResult == 1){
             tvResult.setText(getString(R.string.toast_win));
 
-        }
-
-        if(mResult == 0){
+        }else if(mResult == 0){
             tvResult.setText(getString(R.string.toast_lose));
         }
 
         tvAttempts.setText(mAttempts);
         tvHints.setText(mHints);
+
         switch(mLevel){
             case(Constant.DIFFICULTY_EASY):
                 tvLevel.setText(getString(R.string.button_easy));

@@ -1,4 +1,4 @@
-package it.lomele.sudoku.view;
+package it.lomele.sudoku.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +8,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
-import it.lomele.sudoku.DATABASE.Score;
-import it.lomele.sudoku.DATABASE.ScoreDbController;
+import it.lomele.sudoku.database.ScoreDbController;
 import it.lomele.sudoku.R;
 
 public class HighscoresFragment extends Fragment {
@@ -28,9 +25,9 @@ public class HighscoresFragment extends Fragment {
     }
 
     public void setHighScores(View v) {
-        List<String> hardList = new ArrayList<>(3);
-        List<String> easyList = new ArrayList<>(3);
-        List<String> mediumList = new ArrayList<>(3);
+        List<String> hardList;
+        List<String> easyList;
+        List<String> mediumList;
 
         TextView tvEasy1 = v.findViewById(R.id.tvEasy1);
         TextView tvEasy2 = v.findViewById(R.id.tvEasy2);

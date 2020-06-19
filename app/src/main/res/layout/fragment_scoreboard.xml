@@ -4,8 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tvGames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textView_games"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_scoreboard"
+        android:id="@+id/rvScoreboard"
         android:layout_width="match_parent"
         android:layout_height="244dp">
 

@@ -1,4 +1,4 @@
-package it.lomele.sudoku.view;
+package it.lomele.sudoku.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

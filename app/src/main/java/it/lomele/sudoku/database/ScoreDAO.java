@@ -1,4 +1,4 @@
-package it.lomele.sudoku.DATABASE;
+package it.lomele.sudoku.database;
 
 
 
@@ -7,7 +7,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.sql.Time;
 import java.util.List;
 
 @Dao
@@ -15,14 +14,11 @@ public interface ScoreDAO {
     @Query("SELECT * FROM score")
     List<Score> getAll();
 
-    @Query("SELECT * FROM score WHERE level LIKE :level ")
-    List<Score> getByLevel(String level);
+    @Query ("SELECT COUNT(result) FROM score WHERE result = 1")
+    int countWin();
 
-    @Query("SELECT * FROM score WHERE time LIKE :time")
-    List<Score> getByTime(String time);
-
-    @Query("SELECT * FROM score WHERE id LIKE :id")
-    Score getById(int id);
+    @Query("SELECT COUNT(*) FROM score")
+    int size();
 
 
     @Insert

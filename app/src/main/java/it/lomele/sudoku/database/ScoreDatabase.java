@@ -1,4 +1,4 @@
-package it.lomele.sudoku.DATABASE;
+package it.lomele.sudoku.database;
 
 
 import android.content.Context;
@@ -10,16 +10,16 @@ import androidx.room.TypeConverters;
 
 import it.lomele.sudoku.utils.Converters;
 
-@Database(entities = {Score.class}, version = 6, exportSchema = false)
+@Database(entities = {Score.class}, version = 7, exportSchema = false)
 @TypeConverters({Converters.class})
-public abstract class Db extends RoomDatabase {
+public abstract class ScoreDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "score_db";
-    private static Db instance;
+    private static ScoreDatabase instance;
 
-    public static synchronized Db getInstance(Context context) {
+    public static synchronized ScoreDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), Db.class, DB_NAME)
+            instance = Room.databaseBuilder(context.getApplicationContext(), ScoreDatabase.class, DB_NAME)
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();

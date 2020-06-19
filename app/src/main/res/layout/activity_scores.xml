@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clBase"
         android:layout_width="match_parent"
-        android:layout_height="102dp">
+        android:layout_height="96dp">
 
         <Button
             android:id="@+id/btnList"
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="76dp"
-            android:background="@color/colorButtonLight"
+            android:background="@color/button_background_light"
             android:text="@string/button_scores_list"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
             android:layout_width="108dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@color/colorButtonLight"
+            android:background="@color/button_background_light"
             android:text="@string/button_highscores"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toStartOf="@+id/btnList"

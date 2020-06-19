@@ -31,7 +31,8 @@
                 android:id="@+id/simpleChronometer"
                 android:layout_width="77dp"
                 android:layout_height="52dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -39,14 +40,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/textView_attempts"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvAttempts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -54,14 +57,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/textView_hints"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvHints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <GridView
@@ -86,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonLight"
+                android:backgroundTint="@color/button_background_light"
                 android:text="1"
                 android:textColor="#FFFFFF"
                 />
@@ -96,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonLight"
+                android:backgroundTint="@color/button_background_light"
                 android:text="2"
                 android:textColor="#FFFFFF"
                 />
@@ -106,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonLight"
+                android:backgroundTint="@color/button_background_light"
                 android:text="3"
                 android:textColor="#FFFFFF"/>
 
@@ -115,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonLight"
+                android:backgroundTint="@color/button_background_light"
                 android:text="4"
                 android:textColor="#FFFFFF"/>
 
@@ -124,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonLight"
+                android:backgroundTint="@color/button_background_light"
                 android:text="5"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
@@ -139,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonMid"
+                android:backgroundTint="@color/button_background_medium"
                 android:text="6"
                 android:textColor="#FFFFFF"/>
 
@@ -148,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonMid"
+                android:backgroundTint="@color/button_background_medium"
                 android:text="7"
                 android:textColor="#FFFFFF"/>
 
@@ -157,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonMid"
+                android:backgroundTint="@color/button_background_medium"
                 android:text="8"
                 android:textColor="#FFFFFF"/>
 
@@ -166,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonMid"
+                android:backgroundTint="@color/button_background_medium"
                 android:text="9"
                 android:textColor="#FFFFFF"/>
 
@@ -175,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonMid"
+                android:backgroundTint="@color/button_background_medium"
                 android:text="@string/button_delete"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -189,7 +194,7 @@
                 android:id="@+id/btnSolve"
                 android:layout_width="209dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorButtonDark"
+                android:backgroundTint="@color/button_background_dark"
                 android:text="@string/button_check_solution"
                 android:textColor="#FFFFFF" />
 
@@ -198,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorButtonDark"
+                android:backgroundTint="@color/button_background_dark"
                 android:text="@string/button_hint"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

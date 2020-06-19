@@ -1,6 +1,5 @@
 package it.lomele.sudoku.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import it.lomele.sudoku.R;
+import it.lomele.sudoku.view.fragments.Rules1Fragment;
+import it.lomele.sudoku.view.fragments.Rules2Fragment;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -51,7 +52,7 @@ public class HelpActivity extends AppCompatActivity {
             btnNext.setOnClickListener(this);
 
             btnBack.setEnabled(false);
-            btnBack.setBackgroundColor(getColor(R.color.colorButtonDarkDisabled));
+            btnBack.setBackgroundColor(getColor(R.color.button_disabled_dark));
         }
 
         @Override
@@ -59,15 +60,15 @@ public class HelpActivity extends AppCompatActivity {
             switch(v.getId()){
                 case(R.id.btnBack):
                     btnBack.setEnabled(false);
-                    btnBack.setBackgroundColor(getColor(R.color.colorButtonDarkDisabled));
+                    btnBack.setBackgroundColor(getColor(R.color.button_disabled_dark));
                     btnNext.setEnabled(true);
-                    btnNext.setBackgroundColor(getColor(R.color.colorButtonDark));
+                    btnNext.setBackgroundColor(getColor(R.color.button_background_dark));
                     break;
                 case(R.id.btnNext):
                     btnBack.setEnabled(true);
-                    btnBack.setBackgroundColor(getColor(R.color.colorButtonDark));
+                    btnBack.setBackgroundColor(getColor(R.color.button_background_dark));
                     btnNext.setEnabled(false);
-                    btnNext.setBackgroundColor(getColor(R.color.colorButtonDarkDisabled));
+                    btnNext.setBackgroundColor(getColor(R.color.button_disabled_dark));
                     break;
             }
             switchFragment();

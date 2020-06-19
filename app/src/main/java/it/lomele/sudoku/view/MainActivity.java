@@ -21,19 +21,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class Holder implements View.OnClickListener {
-        private Button btn_start;
+        private Button btnStart;
 
 
         public Holder() {
-            btn_start = findViewById(R.id.btn_start);
-            btn_start.setOnClickListener(this);
+            btnStart = findViewById(R.id.btnStart);
+            btnStart.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if(v.getId() == btn_start.getId()){
-                Intent menu_intent = new Intent(MainActivity.this, MenuActivity.class);
-                startActivity(menu_intent);
+            if(v.getId() == btnStart.getId()){
+                Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(menuIntent);
             }
         }
     }

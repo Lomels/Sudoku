@@ -26,7 +26,6 @@ public class NewGameActivity extends AppCompatActivity {
 
 
     private class Holder implements View.OnClickListener{
-        private TextView tvSudoku;
         private Button btnEasy;
         private Button btnMedium;
         private Button btnHard;
@@ -39,7 +38,6 @@ public class NewGameActivity extends AppCompatActivity {
             btnEasy.setOnClickListener(this);
             btnMedium.setOnClickListener(this);
             btnHard.setOnClickListener(this);
-
         }
 
         @Override
@@ -62,8 +60,5 @@ public class NewGameActivity extends AppCompatActivity {
             startActivity(i);
         }
 
-        public void setError(String e){
-            tvSudoku.setText(e);
-        }
     }
 }

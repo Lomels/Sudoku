@@ -3,11 +3,11 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorHighlight">#80d4d4d4</color>
-    <color name="colorButtonLight">#ee5e7a</color>
-    <color name="colorButtonMid">#d15286</color>
-    <color name="colorButtonDark">#b64790</color>
-    <color name="colorButtonLightDisabled">#74ee5e7a</color>
-    <color name="colorButtonDarkDisabled">#74b64790</color>
-    <color name="colorButtonMidDisabled">#74b64790</color>
+    <color name="cell_highlight">#80d4d4d4</color>
+    <color name="button_background_light">#ee5e7a</color>
+    <color name="button_background_medium">#d15286</color>
+    <color name="button_background_dark">#b64790</color>
+    <color name="button_disabled_light">#74ee5e7a</color>
+    <color name="button_disabled_dark">#74b64790</color>
+    <color name="button_disabled_medium">#74b64790</color>
 </resources>
