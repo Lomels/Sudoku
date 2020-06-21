@@ -80,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
                 setAppLocale("it");
             }
 
-        } //TODO SWITCH AND INFO BUTTON
+        }
 
         private void setAppLocale(String localeCode){
             Resources res = getResources();
