@@ -24,7 +24,6 @@ public class SudokuBoardAdapter extends BaseAdapter {
         this.mContext = context;
     }
 
-
     @Override
     public int getCount() {
         return mGrid.size();
@@ -32,7 +31,7 @@ public class SudokuBoardAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return position;
     }
 
     @Override
@@ -43,7 +42,6 @@ public class SudokuBoardAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final String val = mGrid.get(position).getValue().toString();
-
         mGrid.get(position).setPosition(position);
 
         if(convertView == null){
@@ -59,9 +57,10 @@ public class SudokuBoardAdapter extends BaseAdapter {
         else
             etValue.setText(val);
 
-        etValue.setTypeface(null, Typeface.BOLD);
         if(mGrid.get(position).isEditable())
             etValue.setTextColor(ContextCompat.getColor(mContext, R.color.button_background_dark));
+        else
+            etValue.setTypeface(null, Typeface.BOLD);
 
         // HIGHLIGHT ROW, COLUMN AND CELLGROUP OF THE SELECTED CELL
         if(mGrid.get(position).isHighlight())
@@ -69,9 +68,6 @@ public class SudokuBoardAdapter extends BaseAdapter {
         else
             etValue.setBackground(ContextCompat.getDrawable(mContext,R.drawable.grid_row_border));
 
-
         return convertView;
     }
-
-
 }

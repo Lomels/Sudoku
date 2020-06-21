@@ -26,11 +26,11 @@
     <string name="button_home">Esci</string>
     <string name="textView_time">"Tempo: "</string>
     <string name="button_show">Mostra</string>
-    <string name="button_info">Su di noi</string>
     <string name="button_back">Indietro</string>
     <string name="button_next">Avanti</string>
     <string name="textView_rules2">Ci sono 3 diversi livelli di difficoltà e per ogni livello sono assegnati un numero fisso di tentativi per trovare la soluzione e di indizi intelligenti:\n\n\t\tFACILE: 5 tentativi e indizi illimitati.\n\t\tMEDIO: 3 tentativi e 9 indizi.\n\t\tDIFFICILE: 1 tentativo e 6 indizi.\n\nSe gli indizi finiscono non ti resta che usare il cervello!\nSe i tentativi finiscono hai perso la partita!</string>
     <string name="textView_games">Partite Vinte:</string>
     <string name="textView_win">Vinto</string>
     <string name="textView_lose">Perso</string>
+    <string name="toast_error">C\'è un errore</string>
 </resources>

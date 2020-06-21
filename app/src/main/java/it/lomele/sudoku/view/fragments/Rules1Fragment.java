@@ -13,9 +13,6 @@ public class Rules1Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
-
         return layoutInflater.inflate(R.layout.fragment_rules1, viewGroup, false);
-
     }
-
 }

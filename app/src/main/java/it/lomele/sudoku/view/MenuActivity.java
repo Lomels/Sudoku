@@ -15,20 +15,15 @@ import androidx.fragment.app.FragmentManager;
 import java.util.Locale;
 
 import it.lomele.sudoku.R;
-import it.lomele.sudoku.view.fragments.AboutUsFragment;
 
 public class MenuActivity extends AppCompatActivity {
-
     private Holder holder;
-    AboutUsFragment fragment;
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         holder = new Holder();
-
     }
 
     @Override
@@ -37,7 +32,6 @@ public class MenuActivity extends AppCompatActivity {
         holder.btnNewGame.setVisibility(View.VISIBLE);
         holder.btnScores.setVisibility(View.VISIBLE);
         holder.btnHelp.setVisibility(View.VISIBLE);
-        holder.btnInfo.setVisibility(View.VISIBLE);
         holder.btnEn.setVisibility(View.VISIBLE);
         holder.btnIt.setVisibility(View.VISIBLE);
     }
@@ -46,7 +40,6 @@ public class MenuActivity extends AppCompatActivity {
         private Button btnHelp;
         private Button btnNewGame;
         private Button btnScores;
-        private Button btnInfo;
         private Button btnEn;
         private Button btnIt;
 
@@ -54,14 +47,12 @@ public class MenuActivity extends AppCompatActivity {
             btnHelp = findViewById(R.id.btnHelp);
             btnNewGame = findViewById(R.id.btnNewGame);
             btnScores = findViewById(R.id.btnScores);
-            btnInfo = findViewById(R.id.btnInfo);
             btnEn = findViewById(R.id.btnEn);
             btnIt = findViewById(R.id.btnIt);
 
             btnHelp.setOnClickListener(this);
             btnNewGame.setOnClickListener(this);
             btnScores.setOnClickListener(this);
-            btnInfo.setOnClickListener(this);
             btnEn.setOnClickListener(this);
             btnIt.setOnClickListener(this);
         }
@@ -81,23 +72,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(scoresIntent);
             }
 
-            if(v.getId() == btnInfo.getId()){
-                btnNewGame.setVisibility(View.GONE);
-                btnScores.setVisibility(View.GONE);
-                btnHelp.setVisibility(View.GONE);
-                btnInfo.setVisibility(View.GONE);
-                btnEn.setVisibility(View.GONE);
-                btnIt.setVisibility(View.GONE);
-
-                AboutUsFragment fragment = new AboutUsFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(R.id.frameLayoutInfo,fragment)
-                        .addToBackStack("fragment")
-                        .commit();
-
-            }
-
             if(v.getId() == btnEn.getId()){
                 setAppLocale("en");
             }
@@ -105,10 +79,6 @@ public class MenuActivity extends AppCompatActivity {
             if(v.getId() == btnIt.getId()){
                 setAppLocale("it");
             }
-
-
-
-
 
         } //TODO SWITCH AND INFO BUTTON
 

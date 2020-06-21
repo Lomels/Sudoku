@@ -20,10 +20,6 @@ public interface ScoreDAO {
     @Query("SELECT COUNT(*) FROM score")
     int size();
 
-
     @Insert
-    public void insert(Score score);
-
-    @Delete
-    public void delete(Score score);
+    void insert(Score score);
 }

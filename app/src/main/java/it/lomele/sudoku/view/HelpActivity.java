@@ -90,7 +90,6 @@ public class HelpActivity extends AppCompatActivity {
             }
 
             fragmentTransaction.commit();
-
         }
     }
 }

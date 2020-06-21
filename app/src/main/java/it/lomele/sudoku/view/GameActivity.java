@@ -84,8 +84,10 @@ public class GameActivity extends AppCompatActivity {
         simpleChronometer = findViewById(R.id.simpleChronometer);
         startChronometer();
 
+        // Get the Database instance
         db = Room.databaseBuilder(getApplicationContext(), ScoreDatabase.class, "ScoreDatabase").build();
 
+        // Instance a GameService object that controls the Threads
         mService = new GameService(handler);
 
         Intent data = getIntent();
@@ -151,7 +153,6 @@ public class GameActivity extends AppCompatActivity {
         // GENERATING AND SETTING GRIDVIEW
         GridView gridView = (GridView) findViewById(R.id.gvGrid);
 
-        Log.d(TAG, "Size "+plainGrid.size());
         mAdapter = new SudokuBoardAdapter(getApplicationContext(), plainGrid);
         gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(holder);
@@ -360,7 +361,7 @@ public class GameActivity extends AppCompatActivity {
                         endGame(true);
                     }else {
                         if(checkForAvailableAttempts()) {
-                            Toast.makeText(GameActivity.this, "There's an error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(GameActivity.this, getString(R.string.toast_error), Toast.LENGTH_SHORT).show();
                             setAttempts();
                         }else {
                             endGame(false);

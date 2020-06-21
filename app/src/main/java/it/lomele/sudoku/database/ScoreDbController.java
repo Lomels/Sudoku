@@ -46,31 +46,27 @@ public class ScoreDbController {
             myTime = "00:"+minutes +":"+seconds;
             return  myTime;
         }
-
         return null;
     }
 
     /*
     Inserts a new score in the Database
     */
-
     public void insertNewScore(String time, int level, List<Cell> board, int result){
         List<Integer> mBoard = GridManager.fromCellArrayToIntArray(board);
         Score score = new Score(time, level, mBoard, result);
         scoreDatabase.scoreDAO().insert(score);
-        Log.d(TAG, "Inserted new score: "+score.toString()+"with time: "+time);
     }
 
     /*
     Gets every score from the Database
-     */
+    */
     public List<Score> getAll(){
         scores = scoreDatabase.scoreDAO().getAll();
         if(scores.isEmpty()){
             Log.d(TAG, "Empty Database");
             return null;
         }
-        Log.d(TAG, "Score found: "+scores.get(0).toString());
         return scores;
     }
 
@@ -118,7 +114,6 @@ public class ScoreDbController {
                 }
             }
         }
-
         // Sort each list
         Collections.sort(easyList);
         Collections.sort(mediumList);

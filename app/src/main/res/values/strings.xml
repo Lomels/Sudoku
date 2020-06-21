@@ -19,7 +19,6 @@
     <string name="button_hint">Hint</string>
     <string name="button_home">Quit</string>
     <string name="button_show">Show</string>
-    <string name="button_info">About us</string>
     <string name="button_back">Back</string>
     <string name="button_next">Next</string>
 
@@ -38,6 +37,7 @@
     <string name="toast_last_attempt">Your last attempt!</string>
     <string name="toast_win">You win!</string>
     <string name="toast_lose">You lose!</string>
+    <string name="toast_error">There is an error</string>
     <string name="toast_cell_not_editable">You cannot edit this number!</string>
 
 </resources>

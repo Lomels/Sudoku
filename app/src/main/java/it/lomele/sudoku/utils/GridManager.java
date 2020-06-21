@@ -33,6 +33,29 @@ public class GridManager {
 
     }
 
+    public static List<Cell> fromGameMatrixToCellArray(GameMatrix matrix){
+        // FORMATTING IN List<Cell>, EASIER TO HANDLE FOR GRIDVIEW
+        List<Cell> array = new ArrayList<Cell>();
+        Cell cell;
+
+        for(int row=0; row<matrix.SIZE; row++){
+            for(int column=0; column<matrix.SIZE; column++) {
+                int val = matrix.get(row, column);
+                if (val == 0)
+                    cell = new Cell(val, true);
+                else
+                    cell = new Cell(val, false);
+
+                cell.setBlock(checkBlock(row, column));
+                cell.setRow(row);
+                cell.setCol(column);
+                array.add(cell);
+            }
+        }
+
+        return array;
+    }
+
     public static int checkBlock(int row, int col){
         int block = 0;
         if(col < 3) {
@@ -68,30 +91,7 @@ public class GridManager {
            else
                cell.setHighlight(false);
        }
-
         return array;
     }
 
-    public static List<Cell> fromGameMatrixToCellArray(GameMatrix matrix){
-        // FORMATTING IN List<Cell>, EASIER TO HANDLE FOR GRIDVIEW
-        List<Cell> array = new ArrayList<Cell>();
-        Cell cell;
-
-        for(int row=0; row<matrix.SIZE; row++){
-            for(int column=0; column<matrix.SIZE; column++) {
-                int val = matrix.get(row, column);
-                if (val == 0)
-                    cell = new Cell(val, true);
-                else
-                    cell = new Cell(val, false);
-
-                cell.setBlock(checkBlock(row, column));
-                cell.setRow(row);
-                cell.setCol(column);
-                array.add(cell);
-            }
-        }
-
-        return array;
-    }
 }

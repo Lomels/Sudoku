@@ -17,5 +17,4 @@ public class Rules2Fragment extends Fragment {
         return layoutInflater.inflate(R.layout.fragment_rules2, viewGroup, false);
 
     }
-
 }

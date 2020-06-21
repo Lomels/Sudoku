@@ -28,22 +28,16 @@ import it.lomele.sudoku.utils.GridManager;
 import it.lomele.sudoku.view.SudokuBoardAdapter;
 
 public class ScoreboardFragment extends Fragment {
-
-    private RecyclerView recyclerView;
-    private ScoreboardFragment.ScoreAdapter recyclerAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private GridView gridView;
     private TextView tvGames;
-
-
     private SudokuBoardAdapter gridAdapter;
-    private ScoreDatabase database;
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = layoutInflater.inflate(R.layout.fragment_scoreboard, viewGroup, false);
         tvGames = rootView.findViewById(R.id.tvGames);
 
+        // Stored scores fetch
         ScoreDbController controller = new ScoreDbController(getContext());
         List<Score> list = controller.getAll();
         int wins = controller.getWins();
@@ -60,7 +54,6 @@ public class ScoreboardFragment extends Fragment {
         gridView = (GridView) rootView.findViewById(R.id.gvGrid);
 
         return rootView;
-
     }
 
 
@@ -119,7 +112,9 @@ public class ScoreboardFragment extends Fragment {
                 btnShow.setOnClickListener(this);
 
             }
-
+            /*
+            Set tvLevel properly
+             */
             public void setLevel(int level){
                 switch(level){
                     case(Constant.DIFFICULTY_EASY):
@@ -133,6 +128,9 @@ public class ScoreboardFragment extends Fragment {
                 }
             }
 
+            /*
+            Set tvResult properly
+             */
             public void setResult(int result){
                 switch(result){
                     case(1):
